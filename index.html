@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Kishor Sharma | Assistant Professor (Sanskrit)</title>
+    <title>Dr. Kishor Kumar | Assistant Professor (Sanskrit & Nyāya Darśana)</title>
     <style>
         :root {
             --bg-color: #fcfbfa;
@@ -11,173 +11,266 @@
             --accent-saffron: #b84a14;
             --soft-gold: #f4eae1;
             --border-color: #e6dfd5;
+            --white: #ffffff;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Georgia', serif; }
         body { background-color: var(--bg-color); color: var(--text-dark); line-height: 1.7; padding: 0; }
         
         .main-layout { display: flex; min-height: 100vh; flex-wrap: wrap; }
         
-        /* Left Sidebar - Profile Information */
+        /* Left Profile Sticky Sidebar */
         .profile-sidebar { 
-            background-color: #ffffff; 
+            background-color: var(--white); 
             flex: 1; 
             min-width: 320px; 
-            max-width: 400px; 
-            padding: 40px 30px; 
+            max-width: 380px; 
+            padding: 40px 25px; 
             border-right: 1px solid var(--border-color);
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
         }
         .profile-img { 
-            width: 160px; 
-            height: 160px; 
+            width: 170px; 
+            height: 170px; 
             border-radius: 50%; 
             object-fit: cover; 
             border: 3px solid var(--accent-saffron);
             margin-bottom: 20px;
             background-color: #eee;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
-        .profile-sidebar h1 { font-size: 2rem; color: var(--accent-saffron); margin-bottom: 5px; font-weight: normal; }
-        .title-sub { font-size: 1rem; color: #666; font-style: italic; margin-bottom: 15px; line-height: 1.4; }
+        .profile-sidebar h1 { font-size: 1.8rem; color: var(--accent-saffron); margin-bottom: 5px; font-weight: normal; }
+        .title-sub { font-size: 0.95rem; color: #555; font-style: italic; margin-bottom: 15px; line-height: 1.4; }
         
-        /* Dropdown Menu Styles */
-        .dropdown-container {
-            width: 100%;
-            margin: 20px 0;
-            text-align: left;
+        /* Dropdown Navigation */
+        .dropdown-container { width: 100%; margin: 20px 0; text-align: left; }
+        .dropdown-label { font-size: 0.85rem; font-weight: bold; color: #666; margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+        .custom-select { 
+            width: 100%; padding: 12px; font-size: 0.95rem; font-family: 'Georgia', serif; 
+            border: 1px solid var(--border-color); border-radius: 4px; background-color: var(--bg-color); 
+            color: var(--text-dark); cursor: pointer; outline: none; transition: border-color 0.3s; 
         }
-        .dropdown-label {
-            font-size: 0.95rem;
-            font-weight: bold;
-            color: #555;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .custom-select {
-            width: 100%;
-            padding: 12px;
-            font-size: 1rem;
-            font-family: 'Georgia', serif;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            cursor: pointer;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        .custom-select:focus {
-            border-color: var(--accent-saffron);
-        }
+        .custom-select:focus { border-color: var(--accent-saffron); }
         
-        .contact-info { text-align: left; width: 100%; border-top: 1px solid var(--border-color); padding-top: 25px; font-size: 0.95rem; }
-        .contact-info p { margin-bottom: 10px; color: #555; }
+        .contact-info { text-align: left; width: 100%; border-top: 1px solid var(--border-color); padding-top: 20px; font-size: 0.9rem; }
+        .contact-info p { margin-bottom: 12px; color: #444; word-break: break-word; }
         .contact-info strong { color: var(--text-dark); }
 
         /* Right Content Area */
-        .content-area { flex: 2; min-width: 500px; padding: 60px 50px; background-color: var(--bg-color); }
+        .content-area { flex: 2; min-width: 500px; padding: 50px 45px; background-color: var(--bg-color); }
         
-        section { margin-bottom: 50px; scroll-margin-top: 40px; }
-        section h2 { font-size: 1.6rem; color: var(--accent-saffron); margin-bottom: 20px; border-bottom: 2px solid var(--soft-gold); padding-bottom: 8px; font-weight: normal; }
+        section { margin-bottom: 55px; scroll-margin-top: 30px; }
+        section h2 { font-size: 1.5rem; color: var(--accent-saffron); margin-bottom: 20px; border-bottom: 2px solid var(--soft-gold); padding-bottom: 8px; font-weight: normal; }
         
-        .repo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1-fr)); gap: 20px; margin-top: 20px; }
-        .repo-card { background: #ffffff; padding: 20px; border: 1px solid var(--border-color); border-radius: 4px; transition: transform 0.2s, box-shadow 0.2s; }
-        .repo-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(184,74,20,0.05); }
-        .repo-card h3 { font-size: 1.2rem; color: var(--text-dark); margin-bottom: 10px; font-family: monospace; }
-        .repo-card p { font-size: 0.95rem; color: #666; margin-bottom: 15px; }
-        .repo-link { color: var(--accent-saffron); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
-        
-        footer { margin-top: 80px; font-size: 0.85rem; color: #888; border-top: 1px solid var(--border-color); padding-top: 20px; }
+        .cv-download-btn { display: inline-block; background: var(--accent-saffron); color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-size: 0.95rem; margin-top: 10px; font-weight: bold; transition: background 0.2s; }
+        .cv-download-btn:hover { background: #963a0e; }
 
-        @media (max-width: 768px) {
-            .profile-sidebar { max-width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); padding: 40px 20px; }
-            .content-area { min-width: 100%; padding: 40px 20px; }
+        /* Data Presentation Styles */
+        .data-list { list-style-type: none; }
+        .data-item { background: var(--white); padding: 18px; border: 1px solid var(--border-color); border-radius: 4px; margin-bottom: 15px; border-left: 4px solid var(--accent-saffron); }
+        .data-item h3 { font-size: 1.1rem; color: var(--text-dark); margin-bottom: 5px; font-weight: normal; }
+        .data-item p { font-size: 0.9rem; color: #666; }
+        .meta-tag { display: inline-block; background: var(--soft-gold); color: var(--accent-saffron); font-size: 0.8rem; padding: 2px 8px; border-radius: 3px; font-weight: bold; margin-top: 5px; }
+
+        .repo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
+        .repo-card { background: var(--white); padding: 15px; border: 1px solid var(--border-color); border-radius: 4px; }
+        .repo-card h3 { font-size: 1.1rem; color: var(--accent-saffron); font-family: monospace; margin-bottom: 5px; }
+        .repo-card p { font-size: 0.85rem; color: #666; margin-bottom: 10px; }
+        .repo-link { color: var(--text-dark); text-decoration: none; font-size: 0.85rem; font-weight: bold; }
+        .repo-link:hover { text-decoration: underline; }
+
+        footer { margin-top: 60px; font-size: 0.85rem; color: #888; border-top: 1px solid var(--border-color); padding-top: 20px; text-align: center; }
+
+        @media (max-width: 900px) {
+            .profile-sidebar { max-width: 100%; position: relative; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); padding: 30px 20px; }
+            .content-area { min-width: 100%; padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
 <div class="main-layout">
-    <!-- Left Profile Sticky Sidebar -->
     <div class="profile-sidebar">
-        <img src="profile.jpg" alt="Dr. Kishor Sharma" class="profile-img" onerror="this.src='https://placeholder.com'">
-        <h1>Dr. Kishor Sharma</h1>
-        <p class="title-sub">Assistant Professor of Sanskrit<br>Specialist in Nyāya Darśana & Indian Philosophy</p>
+        <img src="profile.jpg" alt="Dr. Kishor Kumar" class="profile-img" onerror="this.src='https://placeholder.com'">
+        <h1>Dr. Kishor Kumar</h1>
+        <p class="title-sub">Assistant Professor of Sanskrit<br>Specialist in Nyāya-Vaiśeṣika & Indian Philosophy<br><strong>Central Sanskrit University</strong></p>
         
-        <!-- Interactive Dropdown Menu -->
         <div class="dropdown-container">
-            <label class="dropdown-label" for="menu-select">Quick Navigation / त्वरित लिंक:</label>
+            <label class="dropdown-label" for="menu-select">शीघ्र नेविगेशन / Navigation</label>
             <select class="custom-select" id="menu-select" onchange="navigateToSection(this.value)">
                 <option value="#about">परिचय / About Me</option>
-                <option value="#resources">Digital Projects (GitHub)</option>
-                <option value="#research">Research & Publications</option>
-                <option value="#teaching">Teaching & Workshops</option>
+                <option value="#experience">शिक्षण अनुभव / Experience</option>
+                <option value="#publications">ग्रन्थ एवं शोध / Publications</option>
+                <option value="#conferences">शोध पत्र प्रस्तुति / Conferences</option>
+                <option value="#workshops">कार्यशाला / Workshops</option>
+                <option value="#projects">डिजिटल उपक्रम / Projects</option>
             </select>
         </div>
         
         <div class="contact-info">
-            <p><strong>📧 Official Email:</strong> kishorsharma77@example.com</p>
-            <p><strong>📧 Personal Email:</strong> personal@example.com</p>
+            <p><strong>📧 Email:</strong> sharmakishor77@gmail.com</p>
             <p><strong>🌐 GitHub:</strong> ://github.com</p>
-            <p><strong>📍 Location:</strong> India</p>
+            <p><strong>📍 Campus Add:</strong> CSU, SRK Campus, Devprayag, Uttarakhand, 249301</p>
+            <p><strong>🏠 Permanent:</strong> Mandi, Himachal Pradesh</p>
         </div>
     </div>
 
-    <!-- Right Detailed Content -->
     <div class="content-area">
-
         <section id="about">
             <h2>परिचय / About Me</h2>
-            <p>Welcome to my academic portal. I work in the intersection of traditional Sanskrit scholarship and modern computational methodologies. My primary areas of research and teaching encompass classical <strong>Nyāya Darśana</strong>, epistemology, and Indian philosophical logic.</p>
+            <p>नमस्ते! I am an Assistant Professor at Central Sanskrit University, Shri Raghunath Kirti Campus, Devprayag. I hold a Ph.D. in <strong>Nyāya Darśana</strong> (2023) and specialize in traditional Sanskrit systems of logic, classical Indian epistemology, and text digitization methodologies. My academic work spans ancient textual analyses alongside modern computational approaches to Indian knowledge systems.</p>
+            <p style="margin-top:15px;"><strong>Languages:</strong> Sanskrit, Hindi, English, Kannada, Punjabi</p>
+            <a href="cv.pdf" target="_blank" class="cv-download-btn">📄 View / Download Full CV (PDF)</a>
+        </section>
+        <section id="experience">
+            <h2>शिक्षण अनुभव / Teaching Experience</h2>
+            <div class="data-list">
+                <div class="data-item">
+                    <h3><strong>Assistant Professor (Grade)</strong> — Central Sanskrit University, SRK Campus, Devprayag</h3>
+                    <p>Darshan / Nyāya Vaiśeṣika | <em>1 March 2023 – Present</em></p>
+                </div>
+                <div class="data-item">
+                    <h3><strong>Assistant Professor (Grade)</strong> — Central Sanskrit University, Shri Sadashiva Campus, Puri, Odisha</h3>
+                    <p>Nyāya Vaiśeṣika | <em>22 August 2023 – 1 March 2026</em></p>
+                </div>
+                <div class="data-item">
+                    <h3><strong>Assistant Professor</strong> — Shri Aravind Sanskrit Mahavidyalaya, Karsog, Himachal Pradesh</h3>
+                    <p>Darshan | <em>5 August 2022 – 21 August 2023</em></p>
+                </div>
+                <div class="data-item">
+                    <h3><strong>Research Scholar & Instructor</strong> — Central Sanskrit University, SRK Campus, Devprayag</h3>
+                    <p>Darshan & Nyāya | <em>Academic Sessions 2018–19 and 2019–2020</em></p>
+                </div>
+            </div>
+            <p style="font-size:0.95rem; color:#444;">✨ <strong>Project Role:</strong> Co-Ordinator, Sanskrit LOCF, Central Sanskrit University, New Delhi (A UGC Project).</p>
         </section>
 
-        <section id="resources">
-            <h2>Digital Sanskrit Resources</h2>
-            <p>Here are some of my active digital repositories and open-source Sanskrit resources:</p>
-            
-            <div class="repo-grid">
-                <div class="repo-card">
-                    <h3>ashtadhyayi</h3>
-                    <p>Digital frameworks and structured metadata focused on Paninian grammar.</p>
-                    <a href="https://://github.com/ashtadhyayi" target="_blank" class="repo-link">Explore Code →</a>
+        <section id="publications">
+            <h2>प्रकाशित ग्रन्थाः एवं शोधप्रबन्धाः / Publications</h2>
+            <h3 style="font-weight:normal; color:var(--text-dark); margin:15px 0 10px 0; font-size:1.2rem;">📚 सम्पादित ग्रन्थाः (Books Edited/Translated)</h3>
+            <div class="data-list">
+                <div class="data-item">
+                    <h3>न्यायादिशास्त्रार्थमञ्जरी (सह-संपादकः)</h3>
+                    <p>केन्द्रीयसंस्कृतविश्वविद्यालयः, श्रीरघुनाथकीर्तिपरिसरः (2020) | <strong>ISBN:</strong> 978-81-936460-5-2</p>
                 </div>
-                <div class="repo-card">
-                    <h3>adyatithi</h3>
-                    <p>Traditional Indian astronomy tools for precise calendar and Tithi calculations.</p>
-                    <a href="https://://github.com/adyatithi" target="_blank" class="repo-link">Explore Code →</a>
+                <div class="data-item">
+                    <h3>आत्मबोधः (हिन्दी अनुवादः / Co-Editor)</h3>
+                    <p>Apex Book Publishers & Distributors (2019) | <strong>ISBN:</strong> 978-81-87324-38-4</p>
                 </div>
-                <div class="repo-card">
-                    <h3>raw_etexts</h3>
-                    <p>Digitized classical Sanskrit texts preserved in raw machine-readable formats.</p>
-                    <a href="https://://github.com/raw_etexts" target="_blank" class="repo-link">Explore Code →</a>
+                <div class="data-item">
+                    <h3>वेदान्तडिण्डिमः (Co-Editor)</h3>
+                    <p>Apex Book Publishers & Distributors (2019) | <strong>ISBN:</strong> 978-81-87324-40-6</p>
+                </div>
+            </div>
+
+            <h3 style="font-weight:normal; color:var(--text-dark); margin:25px 0 10px 0; font-size:1.2rem;">📝 शोध-लेखाः (Research Articles)</h3>
+            <div class="data-list">
+                <div class="data-item">
+                    <h3>अदृष्टविचारः</h3>
+                    <p>शब्दार्णव | Samnvay Foundation, Muzaffarpur, Bihar | <strong>ISSN:</strong> 2395-5104</p>
+                </div>
+                <div class="data-item">
+                    <h3>न्यायकुसुमाञ्जलिदिशा-उपमानप्रमाणत्वविचारः</h3>
+                    <p>वेदाञ्जली | वैदिक एजूकेशनल रिसर्च सोसाइटी, वाराणसी | <strong>ISSN:</strong> 2349-364X</p>
+                </div>
+                <div class="data-item">
+                    <h3>शाब्दबोधः</h3>
+                    <p>SHODH VRUTANT | ऑ. शोधवृत्तान्त | <strong>ISSN:</strong> 2581-9267</p>
+                </div>
+                <div class="data-item">
+                    <h3>न्यायवैशेषिक में समाधि विवेचन</h3>
+                    <p>ज्योतिर्वेद-प्रस्थानम् | भारतीय ज्योतिषम् | <strong>ISSN:</strong> 2278-0327</p>
+                </div>
+                <div class="data-item">
+                    <h3>बौद्धन्याये प्रमाणस्वरूपम्</h3>
+                    <p>SHODH VRUTANT | ऑ. शोधवृत्तान्त | <strong>ISSN:</strong> 2581-9267</p>
+                </div>
+                <div class="data-item">
+                    <h3>शब्दशक्तिप्रकाशिकायां समासवादविमर्शः</h3>
+                    <p>शाब्दीत्रिपथगा-3 | केन्द्रीयसंस्कृतविश्वविद्यालयः, श्रीरघुनाथकीर्तिपरिसरः | <span class="meta-tag">In Press</span></p>
                 </div>
             </div>
         </section>
 
-        <section id="research">
-            <h2>Research & Publications</h2>
-            <p>My academic publications cover rigorous textual analyses of Nyāya treatises. Detail logs of papers, journals, and books will be updated here shortly.</p>
-            <p style="margin-top: 15px;">📄 <strong>Download Curriculum Vitae (CV):</strong> [Link to PDF coming soon]</p>
+        <section id="conferences">
+            <h2>सङ्गोष्ठी-पत्रवाचनम् / Conference Papers</h2>
+            <div class="data-list">
+                <div class="data-item">
+                    <h3>उपमानप्रमाणविचारः</h3>
+                    <p><strong>Seminar:</strong> Dispassionate Churning of Indology | <strong>Organizer:</strong> भारतीय विद्वत् परिषत् | <em>Jan 2019</em></p>
+                </div>
+                <div class="data-item">
+                    <h3>शब्दशक्तिप्रकाशिकायां समासवादविमर्शः</h3>
+                    <p><strong>Seminar:</strong> Turning points in the concept of Samasasakti | <strong>Organizer:</strong> CSU SRK Campus Devprayag | <em>Jan 2019</em></p>
+                </div>
+                <div class="data-item">
+                    <h3>बौद्धजैनन्याये प्रमाणलक्षणम्</h3>
+                    <p><strong>Seminar:</strong> संस्कृतसाहित्ये बौद्धपरम्परायाः योगदानम् | <strong>Organizer:</strong> CSU SRK Campus Devprayag | <em>Jan 2019</em></p>
+                </div>
+                <div class="data-item">
+                    <h3>संशयहेतुविचारः</h3>
+                    <p><strong>Seminar:</strong> वैशेषिकसूत्रोपस्कारस्थ-विशेषविचाराणां परिशीलनम् | <strong>Organizer:</strong> CSU SRK Campus Devprayag | <em>Feb 2019</em></p>
+                </div>
+                <div class="data-item">
+                    <h3>शब्दालोकरहस्ये शब्दस्यानित्यत्वविवेचनम्</h3>
+                    <p><strong>Seminar:</strong> अद्यतनसन्दर्भे दर्शनशास्त्राणां प्रासङ्गिकता | <strong>Organizer:</strong> CSU SRK Campus Devprayag | <em>Feb 2019</em></p>
+                </div>
+                <div class="data-item">
+                    <h3>लक्ष्मीदेव्याः शक्तित्वेन स्वरूपविमर्शः</h3>
+                    <p><strong>Seminar:</strong> लक्ष्मीपुराणम् | <strong>Organizer:</strong> CSU Shri Sadashiva Campus, Puri | <em>Nov 2023</em></p>
+                </div>
+            </div>
         </section>
 
-        <section id="teaching">
-            <h2>Teaching & Workshops</h2>
-            <p>I regularly conduct specialization modules on traditional philosophical texts and interactive seminars:</p>
-            <ul style="margin-left: 20px; margin-top: 10px;">
-                <li><strong>Sanskrit Grammar & Literature:</strong> Systematic reading of classical texts.</li>
-                <li><strong>Devi Stotra Workshop:</strong> Focus on phonetics, metrical chanting, and underlying philosophical commentaries.</li>
+        <section id="workshops">
+            <h2>कार्यशाला एवं प्रशिक्षण / Workshops Attended</h2>
+            <ul class="data-list">
+                <li class="data-item"><strong>Ishopanishad – A week of close Reading</strong> (CSU Devprayag, May 2026)</li>
+                <li class="data-item"><strong>Textual Reading Of Navya Nyaya Bhasha Pradeep</strong> (CSU Puri, Sep 2024)</li>
+                <li class="data-item"><strong>शक्तिवादे सामान्यपरिशिष्टकाण्डयोः अध्ययनम्</strong> (CSU Guruvayoor Campus, Feb 2024)</li>
+                <li class="data-item"><strong>न्यायभाष्यानुचिन्तनम्</strong> (CSU Rajiv Gandhi Campus, Sringeri, Jan 2024)</li>
+                <li class="data-item"><strong>Aatmatattvaviveka – Kshanabhanguvada of Udayanacharya</strong> (Karnataka Samskrit University, July 2022)</li>
+                <li class="data-item"><strong>Mathuripanchalakshani (माथुरीपञ्चलक्षणी)</strong> (SSUS Kalady, Kerala, Mar 2022)</li>
+                <li class="data-item"><strong>Sharada Script Learning Digital Workshop</strong> (RBU Kolkata & MIF New Delhi, Sep 2020)</li>
+                <li class="data-item"><strong>शोधप्रविधिः शास्त्रशिक्षणपद्धतिः भाषाकौशलं नवानुसन्धानसम्भावनाश्च</strong> (RSkS Ganganath Jha Campus, Apr 2018)</li>
+                <li class="data-item"><strong>Karaka Analysis of Bhattikaavya Using Computer</strong> (RSkS Ganganath Jha Campus, Apr 2018)</li>
             </ul>
+            <p style="margin-top:15px; font-size:0.95rem;">🥇 <strong>Awards:</strong> 1st Prize in State-level VĀKYĀRTHA VICĀRA and Quiz Competition, Uttarakhand (2018).</p>
+        </section>
+
+        <section id="projects">
+            <h2>डिजिटल उपक्रम / Active Repositories</h2>
+            <div class="repo-grid">
+                <div class="repo-card">
+                    <h3>ashtadhyayi</h3>
+                    <p>Digital structured schemas and text components for Paninian grammar linguistics.</p>
+                    <a href="https://github.com" target="_blank" class="repo-link">Explore →</a>
+                </div>
+                <div class="repo-card">
+                    <h3>adyatithi</h3>
+                    <p>Computational models for traditional Indian calendar astronomy and tithi calculations.</p>
+                    <a href="https://github.com" target="_blank" class="repo-link">Explore →</a>
+                </div>
+                <div class="repo-card">
+                    <h3>raw_etexts</h3>
+                    <p>Digital archive of digitized raw Sanskrit philosophical materials.</p>
+                    <a href="https://github.com" target="_blank" class="repo-link">Explore →</a>
+                </div>
+            </div>
         </section>
 
         <footer>
-            <p>© 2026 Dr. Kishor Sharma. Powered by GitHub Pages. Clean Academic Theme.</p>
+            <p>© 2026 Dr. Kishor Kumar. Powered by GitHub Pages. Traditional Modern Academic Persona.</p>
         </footer>
     </div>
 </div>
 
-<!-- JavaScript to handle dropdown click action -->
 <script>
     function navigateToSection(targetId) {
         const element = document.querySelector(targetId);
@@ -186,6 +279,5 @@
         }
     }
 </script>
-
 </body>
 </html>
