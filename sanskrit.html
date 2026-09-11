@@ -5,53 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learn Sanskrit | Dr. Kishor Kumar</title>
     <style>
-        :root { --bg-color: #fcfbfa; --text-dark: #2b2b2b; --accent-saffron: #b84a14; --border-color: #e6dfd5; }
-        body { font-family: 'Georgia', serif; background-color: var(--bg-color); color: var(--text-dark); padding: 40px 20px; line-height: 1.7; }
-        .container { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 6px; border: 1px solid var(--border-color); border-top: 5px solid var(--accent-saffron); box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
-        h1 { color: var(--accent-saffron); font-size: 2rem; margin-bottom: 10px; font-weight: normal; }
+        :root { --bg-color: #fcfbfa; --text-dark: #2b2b2b; --accent-saffron: #b84a14; --soft-gold: #f4eae1; --border-color: #e6dfd5; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Georgia', serif; }
+        body { background-color: var(--bg-color); color: var(--text-dark); line-height: 1.7; }
+        .main-layout { display: flex; min-height: 100vh; flex-wrap: wrap; }
+        .profile-sidebar { background-color: var(--white); flex: 1; min-width: 320px; max-width: 380px; padding: 40px 25px; border-right: 1px solid var(--border-color); text-align: center; display: flex; flex-direction: column; align-items: center; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+        .profile-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-saffron); margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+        .profile-sidebar h1 { font-size: 1.8rem; color: var(--accent-saffron); margin-bottom: 5px; font-weight: normal; }
+        .title-sub { font-size: 0.95rem; color: #555; font-style: italic; margin-bottom: 15px; line-height: 1.4; }
+        .contact-info { text-align: left; width: 100%; border-top: 1px solid var(--border-color); padding-top: 20px; font-size: 0.9rem; margin-top: auto; }
+        .contact-info p { margin-bottom: 12px; color: #444; }
+        .content-area { flex: 2; min-width: 500px; padding: 50px 45px; background-color: var(--bg-color); }
+        section { background: var(--white); padding: 35px; border-radius: 6px; border: 1px solid var(--border-color); border-top: 5px solid var(--accent-saffron); box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        h2 { color: var(--accent-saffron); font-size: 2rem; margin-bottom: 10px; font-weight: normal; }
         h3 { color: var(--accent-saffron); margin: 25px 0 10px 0; font-weight: normal; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
         ul { margin-left: 20px; }
         li { margin-bottom: 10px; }
         .back-btn { display: inline-block; margin-top: 30px; color: var(--accent-saffron); text-decoration: none; font-weight: bold; font-size: 0.95rem; }
-        .back-btn:hover { text-decoration: underline; }
+        @media (max-width: 900px) { .profile-sidebar { max-width: 100%; position: relative; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); } .content-area { min-width: 100%; padding: 30px 20px; } }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <h1>🕉️ Learn Sanskrit / संस्कृत शिक्षण</h1>
-    <p style="font-style: italic; color: #555;">Core grammar, literature, and computational linguistics.</p>
-    
-    <h3>पाठ्यक्रम विवरण (Courses & Syllabus)</h3>
-    <ul>
-        <li><strong>संस्कृत व्याकरण प्रवेशिका (Beginners Level):</strong> संज्ञा, संधि, सुबन्त और तिङन्त रूपों का प्रारंभिक ज्ञान।</li>
-        <li><strong>अष्टाध्यायी पद्धति (Advanced Grammar):</strong> पाणिनीय व्याकरण परंपरा के अनुसार सूत्रों की व्याख्या और रूपसिद्धि का अभ्यास।</li>
-        <li><strong>संस्कृत संभाषण अभ्यास:</strong> दैनिक जीवन में सरल और शुद्ध संस्कृत बोलने का व्यावहारिक प्रशिक्षण।</li>
-    </ul>
-
-    <h3>डिजिटल उपक्रम एवं कल्प (Digital Tools Integration)</h3>
-    <p>कक्षाओं में पारंपरिक पाठ्यविधि के साथ-साथ आधुनिक डिजिटल टूल्स (जैसे अष्टाध्यायी स्कीमा और कम्प्यूटेशनल लिंग्विस्टिक्स) का उपयोग किया जाता है ताकि छात्र तकनीक के माध्यम से भाषा को अधिक वैज्ञानिक रूप से समझ सकें।</p>
-    <!-- Registration & Fee Section -->
-    <div style="background-color: var(--soft-gold); padding: 25px; border-radius: 6px; border: 1px solid var(--border-color); margin-top: 30px;">
-        <h3 style="color: var(--accent-saffron); margin-top: 0; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); font-weight: normal;">📝 पंजीकरण एवं शुल्क विवरण / Registration & Fee</h3>
-        
-        <p style="margin-bottom: 15px; font-size: 0.95rem;">कक्षाओं में प्रवेश, मासिक शुल्क (Fee structure) अथवा आगामी बैच से संबंधित जानकारी के लिए आप नीचे दिए गए माध्यमों से संपर्क कर सकते हैं या सीधे आधिकारिक समूह (Group) से जुड़ सकते हैं:</p>
-        
-        <div style="display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.95rem;">
+<div class="main-layout">
+    <div class="profile-sidebar">
+        <img src="profile.jpg" alt="Dr. Kishor Kumar" class="profile-img" onerror="this.src='https://placeholder.com'">
+        <h1>Dr. Kishor Kumar</h1>
+        <p class="title-sub">Assistant Professor of Sanskrit<br>Central Sanskrit University</p>
+        <div class="contact-info">
             <p><strong>📧 Email:</strong> sharmakishor77@gmail.com</p>
             <p><strong>📞 WhatsApp:</strong> +91 8762647287</p>
         </div>
-        
-        <!-- WhatsApp Group Link Button -->
-        <div style="margin-top: 20px;">
-            <a href="https://whatsapp.comॉ_अपनी_ग्रुप_लिंक_डालें" target="_blank" style="display: inline-block; background-color: #25D366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 0.9rem; transition: background 0.2s;" onmouseover="this.style.backgroundColor='#1ebd58';" onmouseout="this.style.backgroundColor='#25D366';">
-                💬 Join WhatsApp Group (कक्षा से जुड़ें)
-            </a>
-        </div>
     </div>
-
-    <a href="index.html" class="back-btn">← मुख्य पृष्ठ पर वापस जाएँ (Back to Home)</a>
+    <div class="content-area">
+        <section>
+            <h2>🕉️ Learn Sanskrit / संस्कृत शिक्षण</h2>
+            <p style="font-style: italic; color: #555; margin-bottom: 20px;">Core grammar, literature, and computational linguistics.</p>
+            <h3>पाठ्यक्रम विवरण (Courses & Syllabus)</h3>
+            <ul>
+                <li><strong>संस्कृत व्याकरण प्रवेशिका:</strong> संज्ञा, संधि, सुबन्त और तिङन्त रूपों का प्रारंभिक ज्ञान।</li>
+                <li><strong>अष्टाध्यायी पद्धति:</strong> पाणिनीय व्याकरण परंपरा के अनुसार सूत्रों की व्याख्या और रूपसिद्धि का अभ्यास।</li>
+            </ul>
+            <div style="background-color: var(--soft-gold); padding: 25px; border-radius: 6px; border: 1px solid var(--border-color); margin-top: 30px;">
+                <h4 style="color: var(--accent-saffron); font-size: 1.1rem; margin-bottom: 10px;">📝 पंजीकरण एवं शुल्क विवरण / Registration & Fee</h4>
+                <p style="font-size: 0.95rem; margin-bottom: 15px;">प्रवेश अथवा शुल्क संबंधित जानकारी के लिए संपर्क करें:</p>
+                <a href="https://whatsapp.com" target="_blank" style="display: inline-block; background-color: #25D366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 0.9rem;">💬 Join WhatsApp Group</a>
+            </div>
+            <a href="index.html" class="back-btn">← मुख्य पृष्ठ पर वापस जाएँ (Back to Home)</a>
+        </section>
+    </div>
 </div>
-
 </body>
 </html>
