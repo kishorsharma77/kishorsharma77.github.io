@@ -26,37 +26,36 @@
         <p style="margin-top:20px;">नया छात्र? <a href="register.html" style="color:#8b4513; font-weight:bold;">यहाँ रजिस्टर करें</a></p>
     </div>
 
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzYixHkMTxOgiJ6FIcASgwLfI6kStxF-hU1LuFn3wR32NQwAC_OLYK6FPjdXm-hXnkB/exec';
+   <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzYixHkMTxOgiJ6FIcASgwLfI6kStxF-hU1LuFn3wR32NQwAC_OLYK6FPjdXm-hXnkB/exec';
+    
+    // 1. अगर छात्र पहले से लॉगिन है, तो सीधे पोर्टल पर भेजें
+    if (localStorage.getItem("isLoggedIn") === "true") {
+        window.location.href = "portal.html";
+    }
+
+    // 2. फॉर्म को केवल एक बार 'const' के साथ लिखें
+    const loginFormElement = document.getElementById('loginForm');
+
+    loginFormElement.addEventListener('submit', e => {
+        e.preventDefault();
+        document.getElementById('msg').innerHTML = "प्रवेश किया जा रहा है...";
         
-        // 1. अगर छात्र पहले से लॉगिन है, तो सीधे पोर्टल पर भेजें
-        if (localStorage.getItem("isLoggedIn") === "true") {
-            window.location.href = "portal.html";
-        }
-
-        const form = document.getElementById('loginForm');
-
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            document.getElementById('msg').innerHTML = "प्रवेश किया जा रहा है... कृपया प्रतीक्षा करें।";
-            document.getElementById('msg').style.color = "blue";
-            
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => response.text())
-            .then(result => {
-                if(result === "Success") {
-                    localStorage.setItem("isLoggedIn", "true");
-                    window.location.href = "portal.html"; 
-                } else {
-                    document.getElementById('msg').innerHTML = "गलत नंबर या पासवर्ड!";
-                    document.getElementById('msg').style.color = "red";
-                }
-            })
-            .catch(error => {
-                document.getElementById('msg').innerHTML = "सर्वर एरर! कृपया इंटरनेट चेक करें।";
+        fetch(scriptURL, { method: 'POST', body: new FormData(loginFormElement)})
+        .then(response => response.text())
+        .then(result => {
+            if(result === "Success") {
+                localStorage.setItem("isLoggedIn", "true");
+                window.location.href = "portal.html"; 
+            } else {
+                document.getElementById('msg').innerHTML = "गलत नंबर या पासवर्ड!";
                 document.getElementById('msg').style.color = "red";
-            });
+            }
+        })
+        .catch(error => {
+            document.getElementById('msg').innerHTML = "सर्वर एरर!";
         });
-    </script>
+    });
+</script>
 </body>
 </html>
