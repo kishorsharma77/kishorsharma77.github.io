@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile - Sanskrit Roots</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f1ea; padding: 20px; text-align: center; }
+        .container { background: white; padding: 30px; max-width: 500px; margin: 0 auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .pay-btn { background: #28a745; color: white; padding: 15px; display: block; text-decoration: none; border-radius: 5px; font-weight: bold; margin: 20px 0; }
+        .upload-section { border-top: 2px dashed #ccc; padding-top: 20px; margin-top: 20px; text-align: left; }
+        input[type="file"] { margin: 10px 0; }
+        .submit-btn { background: #8b4513; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Namo NamaH!</h2>
+        <p>यहाँ आप अपनी फीस और दस्तावेज़ मैनेज कर सकते हैं।</p>
+
+        <!-- फीस भुगतान हिस्सा -->
+        <div style="background: #fff3d6; padding: 15px; border-radius: 10px;">
+            <h3>💳 फीस भुगतान (Fee Payment)</h3>
+            <p>नीचे दिए गए बटन से सुरक्षित भुगतान करें:</p>
+            <!-- यहाँ आप अपना UPI लिंक या QR कोड डाल सकते हैं -->
+            <a href="sharmakishor77-2@okicici" class="pay-btn">Pay Fees Online (UPI)</a>
+           <a href="https://paypal.me/SanskritRoots" class="pay-btn">Pay Fees Online (Paypal)</a>
+            <p style="font-size: 0.8rem; color: #666;">भुगतान के बाद स्क्रीनशॉट ज़रूर ले लें।</p>
+        </div>
+
+        <!-- रसीद अपलोड हिस्सा -->
+        <div class="upload-section">
+            <h3>📤 रसीद / असाइनमेंट अपलोड करें</h3>
+            <form id="uploadForm">
+                <label>फाइल चुनें (Image/PDF):</label><br>
+                <input type="file" id="myFile" required><br>
+                <input type="text" id="desc" placeholder="विवरण (जैसे: March Fee Receipt)" style="width:100%; padding:8px; margin-bottom:10px;">
+                <button type="submit" class="submit-btn">अपलोड करें</button>
+            </form>
+            <p id="status"></p>
+        </div>
+
+        <br>
+        <a href="portal.html" style="color: #8b4513;">← डैशबोर्ड पर वापस जाएँ</a>
+    </div>
+
+    <script>
+        // अपलोड का लॉजिक: इसे हम Google Drive या Google Sheets से जोड़ सकते हैं
+        document.getElementById('uploadForm').onsubmit = function(e) {
+            e.preventDefault();
+            document.getElementById('status').innerHTML = "अपलोड हो रहा है... (इसके लिए Google Drive API की ज़रूरत होगी)";
+            // नोट: फाइल अपलोड के लिए हमें एक अलग स्क्रिप्ट लगेगी जिसे हम अगले स्टेप में सीखेंगे।
+        };
+    </script>
+</body>
+</html>
