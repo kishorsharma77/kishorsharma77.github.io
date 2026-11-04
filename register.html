@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>छात्र पंजीकरण - Sanskrit Roots</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f1ea; padding: 20px; text-align: center; }
+        .form-container { background: white; padding: 30px; max-width: 400px; margin: 0 auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background: #8b4513; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>नया छात्र पंजीकरण</h2>
+        <form id="regForm">
+            <input type="text" name="Name" placeholder="आपका नाम" required>
+            <input type="number" name="Phone" placeholder="WhatsApp नंबर" required>
+            <input type="email" name="Email" placeholder="ईमेल आईडी" required>
+            <select name="Course">
+                <option value="UGC NET Sanskrit">UGC NET Sanskrit</option>
+                <option value="Basic Sanskrit">Basic Sanskrit</option>
+                <option value="Stotra Learning">Stotra Learning</option>
+            </select>
+            <button type="submit" id="submitBtn">पंजीकरण करें</button>
+        </form>
+        <p id="msg" style="color: green;"></p>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwGw4cHVeCuL6kgthNgxmSi39KZvviaUXja2jSuK-XyD01sK3nI0r2aS6ceazz6pNVn/exec' // <--- यहाँ स्टेप 2 वाला लिंक पेस्ट करें
+        const form = document.getElementById('regForm')
+        const msg = document.getElementById('msg')
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            msg.innerHTML = "भेजा जा रहा है... कृपया प्रतीक्षा करें।"
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML = "बधाई हो! आपका पंजीकरण सफल रहा।"
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+</body>
+</html>
