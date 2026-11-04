@@ -28,23 +28,33 @@
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzYixHkMTxOgiJ6FIcASgwLfI6kStxF-hU1LuFn3wR32NQwAC_OLYK6FPjdXm-hXnkB/exec'
         const form = document.getElementById('loginForm')
 
-        form.addEventListener('submit', e => {
-            e.preventDefault()
-            document.getElementById('msg').innerHTML = "चेक किया जा रहा है..."
-            
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => response.text())
-            .then(result => {
-                if(result === "Success") {
-                    // लॉगिन सफल होने पर छात्र का नाम 'session' में सेव कर लेते हैं
-                    localStorage.setItem("isLoggedIn", "true");
-                    window.location.href = "portal.html"; 
-                } else {
-                    document.getElementById('msg').innerHTML = "गलत नंबर या पासवर्ड!";
-                    document.getElementById('msg').style.color = "red";
-                }
-            })
+        // --- भाग 1: अगर छात्र पहले से लॉगिन है, तो सीधे पोर्टल पर भेजें ---
+    if (localStorage.getItem("isLoggedIn") === "true") {
+        window.location.href = "portal.html";
+    }
+
+    const form = document.getElementById('loginForm');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        document.getElementById('msg').innerHTML = "प्रवेश किया जा रहा है... कृपया प्रतीक्षा करें।";
+        
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => response.text())
+        .then(result => {
+            if(result === "Success") {
+                // --- भाग 2: लॉगिन सफल होने पर 'सच' (True) सेव करें और पोर्टल खोलें ---
+                localStorage.setItem("isLoggedIn", "true");
+                window.location.href = "portal.html"; // यह जादुई लाइन है जो पोर्टल खोल देगी
+            } else {
+                document.getElementById('msg').innerHTML = "गलत नंबर या पासवर्ड!";
+                document.getElementById('msg').style.color = "red";
+            }
         })
-    </script>
+        .catch(error => {
+            document.getElementById('msg').innerHTML = "सर्वर एरर! कृपया इंटरनेट चेक करें।";
+        });
+    });
+</script>
 </body>
 </html>
