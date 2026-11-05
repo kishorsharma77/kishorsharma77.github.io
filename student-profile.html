@@ -39,6 +39,14 @@
         
         <!-- जानकारी का अलाइनमेंट सुधारा गया -->
         <div class="info-row"><span class="label">👤 नाम:</span> <span class="data" id="uName">...</span></div>
+        <div class="info-row">
+    <span class="label">🏠 पता:</span>
+    <span class="data" id="uAddress">...</span>
+</div>
+
+<script>
+    document.getElementById("uAddress").innerText = localStorage.getItem("userAddress") || "N/A";
+</script>
         <div class="info-row"><span class="label">📞 फोन:</span> <span class="data" id="uPhone">...</span></div>
         <div class="info-row"><span class="label">📚 कोर्स:</span> <span class="data" id="uCourse" style="color: #8b4513;">...</span></div>
         <div class="info-row" style="border-bottom: none;"><span class="label">✅ स्टेटस:</span> <span class="data"><span id="uStatus" class="status-badge">...</span></span></div>
