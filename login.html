@@ -26,15 +26,13 @@
         <p style="margin-top:20px;">नया छात्र? <a href="register.html" style="color:#8b4513; font-weight:bold;">यहाँ रजिस्टर करें</a></p>
     </div>
 
-   <script>
+  <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyDZATrLmZUQ95pmp0i5OAhxKlKE90PHm6qLNQKuWQ4kbvoCzASf5-rV20YzFmXApwb/exec';
     
-    // 1. अगर छात्र पहले से लॉग् इन् है, तो सीधे पोर्टल पर भेजें
     if (localStorage.getItem("isLoggedIn") === "true") {
         window.location.href = "portal.html";
     }
 
-    // 2. फॉर्म को केवल एक बार 'const' के साथ लिखें
     const loginFormElement = document.getElementById('loginForm');
 
     loginFormElement.addEventListener('submit', e => {
@@ -44,19 +42,17 @@
         fetch(scriptURL, { method: 'POST', body: new FormData(loginFormElement)})
         .then(response => response.text())
         .then(result => {
-           // यहाँ बदलाव हुआ है: हम अब केवल "Success" नहीं, बल्कि डेटा भी चेक कर रहे हैं
                 if(result.includes("Success")) {
                     
-                    // डेटा को अलग-अलग टुकड़ों में बाँटना (Name, Course, Phone)
                     const userData = result.split("|"); 
                     
-                    // छात्र की जानकारी ब्राउज़र की मेमोरी में सेव करना
+                    // --- यहाँ बदलाव हुआ है ---
                     localStorage.setItem("isLoggedIn", "true");
-                    localStorage.setItem("userName", userData[1]);   // छात्र का नाम
-                    localStorage.setItem("userCourse", userData[2]); // छात्र का कोर्स
-                    localStorage.setItem("userPhone", userData[3]);  // छात्र का फोन नंबर
+                    localStorage.setItem("userName", userData[1]);   
+                    localStorage.setItem("userCourse", userData[2]); 
+                    localStorage.setItem("userPhone", userData[3]);  
+                    localStorage.setItem("userStatus", userData[4]); // <--- नया: स्टेटस सेव करें (Active/Pending)
 
-                    // सीधे पोर्टल पर भेजें
                     window.location.href = "portal.html"; 
                 } else {
                     document.getElementById('msg').innerHTML = "गलत नंबर या पासवर्ड!";
@@ -67,7 +63,6 @@
                 document.getElementById('msg').innerHTML = "सर्वर एरर!";
             });
         });
-
 </script>
 </body>
 </html>
