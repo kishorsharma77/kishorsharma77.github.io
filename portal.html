@@ -5,107 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanskrit Roots Portal</title>
     <style>
-        .logout-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-.logout-btn:hover { background-color: #cc0000; }
+        .logout-btn { position: absolute; top: 20px; right: 20px; background-color: #ff4d4d; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; z-index: 100; }
+        .logout-btn:hover { background-color: #cc0000; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f1ea; margin: 0; padding: 20px; text-align: center; }
         .header { background-color: #8b4513; color: white; padding: 20px; border-radius: 10px; margin-bottom: 30px; }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
-        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-top: 5px solid #8b4513; transition: 0.3s; cursor: pointer; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-top: 5px solid #8b4513; transition: 0.3s; cursor: pointer; position: relative; }
         .card:hover { transform: translateY(-5px); }
         .card h3 { color: #8b4513; }
         .btn { display: inline-block; padding: 10px 20px; background: #8b4513; color: white; text-decoration: none; border-radius: 5px; margin-top: 10px; }
+        
+        /* लॉक किए गए कार्ड का स्टाइल */
+        .locked-card { opacity: 0.6; pointer-events: none; filter: grayscale(1); }
+        .status-alert { background: #fff3cd; color: #856404; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #ffeeba; font-weight: bold; }
     </style>
 </head>
-<script>
-    // चेक करें कि क्या छात्र ने लॉगिन किया है
-    if (localStorage.getItem("isLoggedIn") !== "true") {
-        alert("कृपया पहले लॉगिन करें!");
-        window.location.href = "login.html";
-    }
-</script>
-    <body>
-<button class="logout-btn" onclick="logout()">Logout (बाहर निकलें)</button>
-    <div class="header">
-        <h1>Sanskrit Roots</h1>
-        <!-- छात्र का नाम और कोर्स दिखाने के लिए -->
-<div id="userWelcome" style="background: #fff3d6; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none;">
-    <h3 style="margin: 0; color: #8b4513;">स्वागतम्, <span id="userName">...</span>!</h3>
-    <p style="margin: 5px 0 0 0; font-size: 0.9rem;">आपका कोर्स: <strong id="userCourse">...</strong></p>
-</div>
+<body>
 
-<script>
-    // लोकल स्टोरेज से छात्र का डेटा निकालना
-    const name = localStorage.getItem("userName");
-    const course = localStorage.getItem("userCourse");
+    <!-- सुरक्षा चेक: सबसे ऊपर -->
+    <script>
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            window.location.href = "login.html";
+        }
+    </script>
 
-    if (name && name !== "undefined") {
-        document.getElementById("userWelcome").style.display = "block";
-        document.getElementById("userName").innerText = name;
-        document.getElementById("userCourse").innerText = course;
-    }
-</script>
-        <p>Online Learning & Teaching Management Portal</p>
-    </div>
-
-    <div class="grid-container">
-        <!-- Module 1 -->
-        <div class="card">
-    <h3>🎓 My Profile & Fees</h3>
-    <p>फीस भुगतान और रसीद अपलोड करें</p>
-    <a href="student-profile.html" class="btn">देखें</a>
-        </div>
-
-        <!-- Module 2 -->
-        <div class="card">
-            <h3>📝 Online Test</h3>
-            <p>साप्ताहिक क्विज़ और संस्कृत टेस्ट</p>
-            <a href="#" class="btn">प्रारंभ करें</a>
-        </div>
-
-        
-        <!-- Module 3 -->
-        <div class="card">
-            <h3>📖 Shloka Visualizer</h3>
-            <p>शुद्ध उच्चारण और श्लोक प्रदर्शन</p>
-            <a href="#" class="btn">शुरू करें</a>
-        </div>
-
-        <!-- Module 4 -->
-        <div class="card">
-            <h3>⏰ Class Tracker</h3>
-            <p>कक्षा का समय और उपस्थिति</p>
-            <a href="#" class="btn">चेक करें</a>
-        </div>
-
-        <!-- Module 5 -->
-        <div class="card">
-            <h3>🏆 UGC NET Mock Test</h3>
-            <p>NET/JRF संस्कृत अभ्यास पोर्टल</p>
-            <a href="#" class="btn">Mock Test</a>
-        </div>
-    </div>
-<script>
-    function logout() {
-        localStorage.removeItem("isLoggedIn"); // लॉगिन जानकारी मिटाएं
-        alert("आप सफलतापूर्वक लॉग आउट हो गए हैं।");
-        window.location.href = "login.html";   // लॉगिन पेज पर वापस भेजें
-    }
-
-    // सुरक्षा: अगर लॉगिन नहीं है तो वापस भेजें
-    if (localStorage.getItem("isLoggedIn") !== "true") {
-        window.location.href = "login.html";
-    }
-</script>
-</body>
-</html>
+    <button class="logout-btn" onclick="logout()">Logout (बाहर
