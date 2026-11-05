@@ -44,18 +44,30 @@
         fetch(scriptURL, { method: 'POST', body: new FormData(loginFormElement)})
         .then(response => response.text())
         .then(result => {
-            if(result === "Success") {
-                localStorage.setItem("isLoggedIn", "true");
-                window.location.href = "portal.html"; 
-            } else {
-                document.getElementById('msg').innerHTML = "गलत नंबर या पासवर्ड!";
-                document.getElementById('msg').style.color = "red";
-            }
-        })
-        .catch(error => {
-            document.getElementById('msg').innerHTML = "सर्वर एरर!";
+           // यहाँ बदलाव हुआ है: हम अब केवल "Success" नहीं, बल्कि डेटा भी चेक कर रहे हैं
+                if(result.includes("Success")) {
+                    
+                    // डेटा को अलग-अलग टुकड़ों में बाँटना (Name, Course, Phone)
+                    const userData = result.split("|"); 
+                    
+                    // छात्र की जानकारी ब्राउज़र की मेमोरी में सेव करना
+                    localStorage.setItem("isLoggedIn", "true");
+                    localStorage.setItem("userName", userData[1]);   // छात्र का नाम
+                    localStorage.setItem("userCourse", userData[2]); // छात्र का कोर्स
+                    localStorage.setItem("userPhone", userData[3]);  // छात्र का फोन नंबर
+
+                    // सीधे पोर्टल पर भेजें
+                    window.location.href = "portal.html"; 
+                } else {
+                    document.getElementById('msg').innerHTML = "गलत नंबर या पासवर्ड!";
+                    document.getElementById('msg').style.color = "red";
+                }
+            })
+            .catch(error => {
+                document.getElementById('msg').innerHTML = "सर्वर एरर!";
+            });
         });
-    });
+
 </script>
 </body>
 </html>
