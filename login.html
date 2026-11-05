@@ -52,7 +52,9 @@
                     localStorage.setItem("userCourse", userData[2]); 
                     localStorage.setItem("userPhone", userData[3]);  
                     localStorage.setItem("userStatus", userData[4]); // <--- नया: स्टेटस सेव करें (Active/Pending)
-
+                    localStorage.setItem("userAddress", userData[5]); // यहाँ एड्रेस सेव होगा
+                    localStorage.setItem("userPhoto", userData[6]);   // यहाँ फोटो सेव होगी
+                   
                     window.location.href = "portal.html"; 
                 } else {
                     document.getElementById('msg').innerHTML = "गलत नंबर या पासवर्ड!";
