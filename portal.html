@@ -38,6 +38,23 @@
 <button class="logout-btn" onclick="logout()">Logout (बाहर निकलें)</button>
     <div class="header">
         <h1>Sanskrit Roots</h1>
+        <!-- छात्र का नाम और कोर्स दिखाने के लिए -->
+<div id="userWelcome" style="background: #fff3d6; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none;">
+    <h3 style="margin: 0; color: #8b4513;">स्वागतम्, <span id="userName">...</span>!</h3>
+    <p style="margin: 5px 0 0 0; font-size: 0.9rem;">आपका कोर्स: <strong id="userCourse">...</strong></p>
+</div>
+
+<script>
+    // लोकल स्टोरेज से छात्र का डेटा निकालना
+    const name = localStorage.getItem("userName");
+    const course = localStorage.getItem("userCourse");
+
+    if (name && name !== "undefined") {
+        document.getElementById("userWelcome").style.display = "block";
+        document.getElementById("userName").innerText = name;
+        document.getElementById("userCourse").innerText = course;
+    }
+</script>
         <p>Online Learning & Teaching Management Portal</p>
     </div>
 
