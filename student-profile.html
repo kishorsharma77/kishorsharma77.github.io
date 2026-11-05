@@ -6,46 +6,30 @@
     <title>Sanskrit Roots - My Profile & Payment</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f1ea; padding: 20px; text-align: center; }
-        
-        .profile-card { 
-            background: white; 
-            padding: 30px; 
-            max-width: 500px; 
-            margin: 20px auto; 
-            border-radius: 15px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
-            border-top: 8px solid #8b4513; 
-        }
-
+        .profile-card { background: white; padding: 30px; max-width: 500px; margin: 20px auto; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border-top: 8px solid #8b4513; }
         h2 { color: #8b4513; margin-bottom: 25px; border-bottom: 2px solid #f4eae1; padding-bottom: 10px; }
 
-        /* Left-Right Alignment Logic */
-        .info-row { 
-            display: flex; 
-            justify-content: space-between; 
-            padding: 12px 0; 
-            border-bottom: 1px solid #f2f2f2; 
-            text-align: left;
-        }
-
-        .label { font-weight: bold; color: #666; flex: 1; }
-        .data { font-weight: bold; color: #333; flex: 1.5; text-align: right; word-wrap: break-word; }
+        .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f2f2f2; text-align: left; }
+        .label { font-weight: bold; color: #666; }
+        .data { font-weight: bold; color: #333; }
 
         .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; }
         .active-status { background-color: #d4edda; color: #155724; }
         .pending-status { background-color: #fff3cd; color: #856404; }
 
-        /* Payment Section Styles */
         .payment-section { margin-top: 30px; background: #fdf8f0; padding: 20px; border-radius: 10px; border: 1px solid #eee; }
         .course-select { width: 100%; padding: 12px; margin: 15px 0; border: 2px solid #8b4513; border-radius: 8px; font-size: 1rem; }
         
-        .btn-pay { display: none; padding: 15px; border-radius: 8px; text-decoration: none; font-weight: bold; margin: 10px 0; color: white; font-size: 1.1rem; transition: 0.3s; }
+        .btn-pay { display: block; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; margin: 10px 0; color: white; transition: 0.3s; }
         .upi-btn { background: #28a745; }
-        .upi-btn:hover { background: #218838; }
         .paypal-btn { background: #003087; }
-        .paypal-btn:hover { background: #00256a; }
-
-        .note { font-size: 0.8rem; color: #666; margin-top: 10px; line-height: 1.4; }
+        
+        /* कॉपी और QR सेक्शन */
+        .copy-box { background: #eee; padding: 10px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 0.9rem; border: 1px solid #ccc; }
+        .copy-btn { background: #8b4513; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; }
+        
+        .qr-container { margin-top: 20px; padding: 15px; background: white; border: 1px solid #ddd; border-radius: 10px; display: none; }
+        .qr-container img { max-width: 180px; }
     </style>
 </head>
 <body>
@@ -53,86 +37,87 @@
     <div class="profile-card">
         <h2>👤 छात्र प्रोफाइल (Profile)</h2>
         
-        <div class="info-row">
-            <span class="label">👤 नाम:</span>
-            <span class="data" id="uName">...</span>
-        </div>
-
-        <div class="info-row">
-            <span class="label">📞 फोन:</span>
-            <span class="data" id="uPhone">...</span>
-        </div>
-
-        <div class="info-row">
-            <span class="label">📚 कोर्स:</span>
-            <span class="data" id="uCourse" style="color: #8b4513;">...</span>
-        </div>
-
-        <div class="info-row" style="border-bottom: none;">
-            <span class="label">✅ स्टेटस:</span>
-            <span class="data">
-                <span id="uStatus" class="status-badge">...</span>
-            </span>
-        </div>
+        <div class="info-row"><span class="label">👤 नाम:</span> <span class="data" id="uName">...</span></div>
+        <div class="info-row"><span class="label">📞 फोन:</span> <span class="data" id="uPhone">...</span></div>
+        <div class="info-row"><span class="label">📚 कोर्स:</span> <span class="data" id="uCourse">...</span></div>
+        <div class="info-row" style="border-bottom: none;"><span class="label">✅ स्टेटस:</span> <span class="data"><span id="uStatus" class="status-badge">...</span></span></div>
 
         <div class="payment-section">
             <h3 style="margin-top: 0; color: #8b4513;">💳 फीस भुगतान (Payment)</h3>
-            <p style="font-size: 0.9rem;">कोर्स चुनें और भुगतान का माध्यम चुनें:</p>
             
-            <select id="courseSelect" class="course-select" onchange="updateLinks()">
+            <select id="courseSelect" class="course-select" onchange="updatePayment()">
                 <option value="">-- कोर्स चुनें --</option>
                 <option value="5000">UGC NET Sanskrit (₹5000 / $75)</option>
                 <option value="1500">Basic Sanskrit (₹1500 / $25)</option>
                 <option value="1000">Stotra Learning (₹1000 / $15)</option>
             </select>
 
-            <div id="payButtons" style="display: none;">
-                <!-- UPI Link for India -->
-                <a id="upiLink" href="#" class="btn-pay upi-btn">
-                   🇮🇳 Pay via UPI (India)
+            <div id="paymentMethods" style="display: none;">
+                <!-- 1. UPI ID Copy Box -->
+                <div class="copy-box">
+                    <span id="upiIdText">sharmakishor77-2@okicici</span>
+                    <button class="copy-btn" onclick="copyUPI()">Copy ID</button>
+                </div>
+
+                <!-- 2. QR Code (Dynamic) -->
+                <div class="qr-container" id="qrDiv">
+                    <p style="font-size: 0.8rem; margin-bottom: 5px;">QR कोड स्कैन करें:</p>
+                    <img id="qrImg" src="" alt="UPI QR Code">
+                </div>
+
+                <!-- 3. Mobile Pay Button -->
+                <a id="upiMobileLink" href="#" class="btn-pay upi-btn" style="display: none;">
+                   📲 Pay via UPI App (Mobile Only)
                 </a>
 
-                <!-- PayPal Link for International -->
-                <a href="https://www.paypal.com/ncp/payment/UULBJHGHKXC5L" target="_blank" class="btn-pay paypal-btn" style="display: block;">
-                   🌎 Pay via PayPal (Intl)
+                <!-- 4. PayPal -->
+                <a href="https://www.paypal.com/ncp/payment/UULBJHGHKXC5L" target="_blank" class="btn-pay paypal-btn">
+                   🌎 Pay via PayPal (International)
                 </a>
                 
-                <p class="note"><strong>नोट:</strong> भुगतान के बाद रसीद का स्क्रीनशॉट व्हाट्सएप या ईमेल पर ज़रूर भेजें।</p>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">भुगतान के बाद रसीद का स्क्रीनशॉट जरूर भेजें।</p>
             </div>
         </div>
-
-        <br>
-        <a href="portal.html" style="color: #8b4513; text-decoration: none; font-weight: bold;">← डैशबोर्ड पर वापस जाएँ</a>
+        <br><a href="portal.html" style="color: #8b4513; text-decoration: none; font-weight: bold;">← डैशबोर्ड</a>
     </div>
 
     <script>
-        // 1. डेटा लोड करना
+        const vpa = "sharmakishor77-2@okicici";
+        const name = "Dr Kishor Kumar";
+
+        // डेटा लोड करना
         document.getElementById("uName").innerText = localStorage.getItem("userName") || "N/A";
         document.getElementById("uPhone").innerText = localStorage.getItem("userPhone") || "N/A";
         document.getElementById("uCourse").innerText = localStorage.getItem("userCourse") || "N/A";
-        
         const status = localStorage.getItem("userStatus");
-        const statusEl = document.getElementById("uStatus");
-        statusEl.innerText = status || "Registered";
-        statusEl.classList.add(status === "Active" ? "active-status" : "pending-status");
+        document.getElementById("uStatus").innerText = status || "Registered";
+        document.getElementById("uStatus").classList.add(status === "Active" ? "active-status" : "pending-status");
 
-        // 2. पेमेंट लिंक अपडेट करना
-        function updateLinks() {
+        function updatePayment() {
             const amount = document.getElementById("courseSelect").value;
-            const payDiv = document.getElementById("payButtons");
-            const upiBtn = document.getElementById("upiLink");
+            const payMethods = document.getElementById("paymentMethods");
+            if(!amount) { payMethods.style.display="none"; return; }
+            
+            payMethods.style.display="block";
 
-            if(amount) {
-                payDiv.style.display = "block";
-                
-                // UPI Link Logic (sharmakishor77-2@okicici)
-                const vpa = "sharmakishor77-2@okicici";
-                const name = "Dr Kishor Kumar";
-                upiBtn.href = `upi://pay?pa=${vpa}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
-                upiBtn.style.display = "block";
-            } else {
-                payDiv.style.display = "none";
+            // 1. QR Code API (Dynamic)
+            const upiString = `upi://pay?pa=${vpa}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiString)}`;
+            document.getElementById("qrImg").src = qrUrl;
+            document.getElementById("qrDiv").style.display = "block";
+
+            // 2. Mobile deep link (Detect Mobile)
+            if (/Android|iPhone/i.test(navigator.userAgent)) {
+                document.getElementById("upiMobileLink").href = upiString;
+                document.getElementById("upiMobileLink").style.display = "block";
             }
+        }
+
+        function copyUPI() {
+            const upiText = document.getElementById("upiIdText").innerText;
+            navigator.clipboard.writeText(upiText).then(() => {
+                alert("UPI ID कॉपी हो गई है! अब आप अपनी पेमेंट ऐप में इसे पेस्ट कर सकते हैं।");
+            });
         }
     </script>
 </body>
