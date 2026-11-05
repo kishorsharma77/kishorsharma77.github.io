@@ -16,13 +16,13 @@
         .btn { display: inline-block; padding: 10px 20px; background: #8b4513; color: white; text-decoration: none; border-radius: 5px; margin-top: 10px; }
         
         /* लॉक किए गए कार्ड का स्टाइल */
-        .locked-card { opacity: 0.6; pointer-events: none; filter: grayscale(1); }
+        .locked-card { opacity: 0.5; pointer-events: none; filter: grayscale(1); }
         .status-alert { background: #fff3cd; color: #856404; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #ffeeba; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <!-- सुरक्षा चेक: सबसे ऊपर -->
+    <!-- सुरक्षा चेक -->
     <script>
         if (localStorage.getItem("isLoggedIn") !== "true") {
             window.location.href = "login.html";
@@ -43,103 +43,113 @@
         <p>Online Learning & Teaching Management Portal</p>
     </div>
 
-    <!-- अकाउंट स्टेटस अलर्ट (केवल Pending छात्रों को दिखेगा) -->
     <div id="statusAlertBox"></div>
 
     <div class="grid-container">
-        <!-- Module 1: खुला रहेगा (Fees & Profile) -->
-        <div class="card">
+        <!-- Module 1: हमेशा खुला रहेगा -->
+        <div id="profile-card" class="card">
             <h3>🎓 My Profile & Fees</h3>
             <p>कोर्स चुनें और फीस भुगतान करें</p>
             <a href="student-profile.html" class="btn">देखें</a>
         </div>
 
-        <!-- Module 2: Lockable -->
-        <div class="card lockable">
+        <!-- Module 2: Online Test -->
+        <div id="test-card" class="card lockable">
             <h3>📝 Online Test</h3>
             <p>साप्ताहिक क्विज़ और संस्कृत टेस्ट</p>
             <a href="test.html" class="btn">प्रारंभ करें</a>
         </div>
 
-        <!-- Module 3: Lockable -->
-        <div class="card lockable">
+        <!-- Module 3: Shloka Visualizer -->
+        <div id="shloka-card" class="card lockable">
             <h3>📖 Shloka Visualizer</h3>
             <p>शुद्ध उच्चारण और श्लोक प्रदर्शन</p>
             <a href="shloka.html" class="btn">शुरू करें</a>
         </div>
 
-        <!-- Module 4: Lockable -->
-        <div class="card lockable">
+        <!-- Module 4: Class Tracker -->
+        <div id="tracker-card" class="card lockable">
             <h3>⏰ Class Tracker</h3>
             <p>कक्षा का समय और उपस्थिति</p>
             <a href="#" class="btn">चेक करें</a>
         </div>
 
-        <!-- Module 5: Lockable -->
-        <div class="card lockable">
+        <!-- Module 5: UGC NET Mock Test -->
+        <div id="net-card" class="card lockable">
             <h3>🏆 UGC NET Mock Test</h3>
             <p>NET/JRF संस्कृत अभ्यास पोर्टल</p>
-            <a href="#" class="btn">Mock Test</a>
+            <a href="mock-test.html" class="btn">Mock Test</a>
         </div>
     </div>
+
+    <!-- संपर्क सेक्शन -->
+    <div style="margin-top: 40px; padding: 20px; border-top: 2px solid #e6dfd5; background: white; border-radius: 10px;">
+        <h3 style="color: #8b4513;">सहायता एवं संपर्क (Support & Contact)</h3>
+        <p>किसी भी तकनीकी समस्या या कोर्स संबंधी जानकारी के लिए संपर्क करें:</p>
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
+            <a href="https://wa.me/919459541387?text=नमस्ते, मुझे सहायता चाहिए।" target="_blank" style="background: #25D366; color: white; padding: 12px 25px; text-decoration: none; border-radius: 30px; font-weight: bold;">💬 WhatsApp करें</a>
+            <a href="mailto:edusanskrit8@gmail.com" style="background: #d44638; color: white; padding: 12px 25px; text-decoration: none; border-radius: 30px; font-weight: bold;">✉️ ईमेल भेजें</a>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/918762647287" target="_blank" style="position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35">
+    </a>
 
 <script>
     // 1. डेटा लोड करना
     const name = localStorage.getItem("userName");
-    const course = localStorage.getItem("userCourse");
+    const course = localStorage.getItem("userCourse") || "";
     const status = localStorage.getItem("userStatus");
 
     document.getElementById("userName").innerText = name || "छात्र";
     document.getElementById("userCourse").innerText = course || "Not Selected";
 
-    // 2. लॉकिंग लॉजिक
-    if (status !== "Active") {
-        // स्टेटस बैनर दिखाएँ
-        document.getElementById("statusAlertBox").innerHTML = `
-            <div class="status-alert">
-                ⚠️ आपका अकाउंट अभी 'सक्रिय' नहीं है। कृपया 'My Profile & Fees' में जाकर भुगतान करें।
-            </div>
-        `;
-
-        // सभी lockable कार्ड्स को लॉक करें
+    // 2. स्मार्ट लॉकिंग फंक्शन
+    function lockAll() {
         document.querySelectorAll(".lockable").forEach(card => {
             card.classList.add("locked-card");
             card.querySelector(".btn").innerText = "🔒 Locked";
         });
     }
 
-    // 3. लॉगआउट फंक्शन
+    function unlockCard(id, originalText) {
+        const card = document.getElementById(id);
+        if (card) {
+            card.classList.remove("locked-card");
+            card.querySelector(".btn").innerText = originalText;
+        }
+    }
+
+    // डिफ़ॉल्ट रूप से सब लॉक करें
+    lockAll();
+
+    // 3. कोर्स के हिसाब से अनलॉकिंग
+    if (status === "Active") {
+        if (course.includes("NET")) {
+            unlockCard("test-card", "प्रारंभ करें");
+            unlockCard("tracker-card", "चेक करें");
+            unlockCard("net-card", "Mock Test");
+        } else if (course.includes("Basic")) {
+            unlockCard("test-card", "प्रारंभ करें");
+            unlockCard("tracker-card", "चेक करें");
+        } else if (course.includes("Stotra")) {
+            unlockCard("shloka-card", "शुरू करें");
+        }
+    } else {
+        document.getElementById("statusAlertBox").innerHTML = `
+            <div class="status-alert">
+                ⚠️ आपका अकाउंट अभी सक्रिय नहीं है। कृपया 'My Profile & Fees' में जाकर भुगतान करें।
+            </div>
+        `;
+    }
+
     function logout() {
-        localStorage.clear(); // सारा डेटा साफ़ करें
+        localStorage.clear();
         alert("आप सफलतापूर्वक लॉग आउट हो गए हैं।");
         window.location.href = "login.html";
     }
 </script>
-    <!-- Support Section -->
-<div style="margin-top: 40px; padding: 20px; border-top: 2px solid #e6dfd5; background: white; border-radius: 10px;">
-    <h3 style="color: #8b4513;">सहायता एवं संपर्क (Support & Contact)</h3>
-    <p>किसी भी तकनीकी समस्या या कोर्स संबंधी जानकारी के लिए संपर्क करें:</p>
-    
-    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
-        <!-- WhatsApp Button -->
-        <a href="https://wa.me/919459541387?text=नमस्ते,%मुझे%20Sanskrit%20Roots%20पोर्टल%20के%20बारे%20में%20सहायता%20चाहिए।" 
-           target="_blank" 
-           style="background: #25D366; color: white; padding: 12px 25px; text-decoration: none; border-radius: 30px; font-weight: bold; display: flex; align-items: center; gap: 10px;">
-            💬 WhatsApp करें
-        </a>
-
-        <!-- Email Button -->
-        <a href="mailto:edusanskrit8@gmail.com?subject=Sanskrit%20Roots%20Portal%20Support" 
-           style="background: #d44638; color: white; padding: 12px 25px; text-decoration: none; border-radius: 30px; font-weight: bold; display: flex; align-items: center; gap: 10px;">
-            ✉️ ईमेल भेजें
-        </a>
-    </div>
-</div>
-    <!-- Floating WhatsApp Button -->
-<a href="https://wa.me/918762647287" 
-   target="_blank" 
-   style="position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 1000; text-decoration: none;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35" alt="WA">
-</a>
 </body>
 </html>
