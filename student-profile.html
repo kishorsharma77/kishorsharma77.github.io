@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile - Sanskrit Roots</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f1ea; padding: 20px; text-align: center; }
+        .card { background: white; padding: 25px; max-width: 500px; margin: 20px auto; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 5px solid #8b4513; }
+        .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; text-align: left; }
+        .course-select { width: 100%; padding: 10px; margin: 15px 0; border-radius: 5px; border: 1px solid #8b4513; }
+        .pay-box { background: #fff3d6; padding: 15px; border-radius: 8px; margin-top: 20px; display: none; }
+        .btn { background: #8b4513; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; cursor: pointer; border: none; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2 id="welcomeMsg">नमस्ते!</h2>
+        <div class="info-row"><strong>नाम:</strong> <span id="dspName">...</span></div>
+        <div class="info-row"><strong>नंबर:</strong> <span id="dspPhone">...</span></div>
+        <div class="info-row"><strong>वर्तमान कोर्स:</strong> <span id="dspCourse">...</span></div>
+
+        <hr>
+        
+        <h3>📚 नया कोर्स चुनें / फीस भरें</h3>
+        <select id="courseSelector" class="course-select" onchange="updateFee()">
+            <option value="">-- कोर्स चुनें --</option>
+            <option value="UGC-NET">UGC NET Sanskrit (₹5000)</option>
+            <option value="Basic-Sanskrit">Basic Sanskrit (₹1500)</option>
+            <option value="Stotra-Class">Stotra Learning (₹1000)</option>
+        </select>
+
+        <div id="feeDisplay" class="pay-box">
+            <p id="feeText"></p>
+            <a href="#" id="payLink" class="btn">अभी फीस भरें (Pay Now)</a>
+        </div>
+
+        <br><br>
+        <a href="portal.html" style="color: #8b4513;">← डैशबोर्ड</a>
+    </div>
+
+    <script>
+        // LocalStorage से छात्र का डेटा दिखाना
+        document.getElementById('dspName').innerText = localStorage.getItem("userName");
+        document.getElementById('dspPhone').innerText = localStorage.getItem("userPhone");
+        document.getElementById('dspCourse').innerText = localStorage.getItem("userCourse");
+        document.getElementById('welcomeMsg').innerText = "नमस्ते, " + localStorage.getItem("userName") + "!";
+
+        function updateFee() {
+            const course = document.getElementById('courseSelector').value;
+            const payBox = document.getElementById('feeDisplay');
+            const feeText = document.getElementById('feeText');
+            
+            if(course) {
+                payBox.style.display = "block";
+                if(course === "UGC-NET") feeText.innerText = "UGC NET कोर्स की फीस ₹5000 है।";
+                if(course === "Basic-Sanskrit") feeText.innerText = "Basic Sanskrit कोर्स की फीस ₹1500 है।";
+                if(course === "Stotra-Class") feeText.innerText = "Stotra Learning कोर्स की फीस ₹1000 है।";
+                
+                // यहाँ आप अपना UPI लिंक डायनामिक बना सकते हैं
+                document.getElementById('payLink').href = "upi://pay?pa=YOURID@okicici&pn=SanskritRoots&am=" + (course === "UGC-NET" ? "5000" : "1500");
+            } else {
+                payBox.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
