@@ -29,4 +29,91 @@
         }
     </script>
 
-    <button class="logout-btn" onclick="logout()">Logout (बाहर
+    <button class="logout-btn" onclick="logout()">Logout (बाहर निकलें)</button>
+
+    <div class="header">
+        <h1>Sanskrit Roots</h1>
+        
+        <!-- स्वागत संदेश -->
+        <div id="userWelcome" style="background: #fff3d6; padding: 10px; border-radius: 8px; margin: 10px auto; max-width: 500px; color: #333;">
+            <h3 style="margin: 0; color: #8b4513;">स्वागतम्, <span id="userName">छात्र</span>!</h3>
+            <p style="margin: 5px 0 0 0; font-size: 0.9rem;">आपका कोर्स: <strong id="userCourse">...</strong></p>
+        </div>
+
+        <p>Online Learning & Teaching Management Portal</p>
+    </div>
+
+    <!-- अकाउंट स्टेटस अलर्ट (केवल Pending छात्रों को दिखेगा) -->
+    <div id="statusAlertBox"></div>
+
+    <div class="grid-container">
+        <!-- Module 1: खुला रहेगा (Fees & Profile) -->
+        <div class="card">
+            <h3>🎓 My Profile & Fees</h3>
+            <p>कोर्स चुनें और फीस भुगतान करें</p>
+            <a href="student-profile.html" class="btn">देखें</a>
+        </div>
+
+        <!-- Module 2: Lockable -->
+        <div class="card lockable">
+            <h3>📝 Online Test</h3>
+            <p>साप्ताहिक क्विज़ और संस्कृत टेस्ट</p>
+            <a href="test.html" class="btn">प्रारंभ करें</a>
+        </div>
+
+        <!-- Module 3: Lockable -->
+        <div class="card lockable">
+            <h3>📖 Shloka Visualizer</h3>
+            <p>शुद्ध उच्चारण और श्लोक प्रदर्शन</p>
+            <a href="shloka.html" class="btn">शुरू करें</a>
+        </div>
+
+        <!-- Module 4: Lockable -->
+        <div class="card lockable">
+            <h3>⏰ Class Tracker</h3>
+            <p>कक्षा का समय और उपस्थिति</p>
+            <a href="#" class="btn">चेक करें</a>
+        </div>
+
+        <!-- Module 5: Lockable -->
+        <div class="card lockable">
+            <h3>🏆 UGC NET Mock Test</h3>
+            <p>NET/JRF संस्कृत अभ्यास पोर्टल</p>
+            <a href="#" class="btn">Mock Test</a>
+        </div>
+    </div>
+
+<script>
+    // 1. डेटा लोड करना
+    const name = localStorage.getItem("userName");
+    const course = localStorage.getItem("userCourse");
+    const status = localStorage.getItem("userStatus");
+
+    document.getElementById("userName").innerText = name || "छात्र";
+    document.getElementById("userCourse").innerText = course || "Not Selected";
+
+    // 2. लॉकिंग लॉजिक
+    if (status !== "Active") {
+        // स्टेटस बैनर दिखाएँ
+        document.getElementById("statusAlertBox").innerHTML = `
+            <div class="status-alert">
+                ⚠️ आपका अकाउंट अभी 'सक्रिय' नहीं है। कृपया 'My Profile & Fees' में जाकर भुगतान करें।
+            </div>
+        `;
+
+        // सभी lockable कार्ड्स को लॉक करें
+        document.querySelectorAll(".lockable").forEach(card => {
+            card.classList.add("locked-card");
+            card.querySelector(".btn").innerText = "🔒 Locked";
+        });
+    }
+
+    // 3. लॉगआउट फंक्शन
+    function logout() {
+        localStorage.clear(); // सारा डेटा साफ़ करें
+        alert("आप सफलतापूर्वक लॉग आउट हो गए हैं।");
+        window.location.href = "login.html";
+    }
+</script>
+</body>
+</html>
