@@ -74,17 +74,20 @@
                     const userData = result.split("|"); 
                     
                     // --- यहाँ बदलाव हुआ है ---
-                    localStorage.setItem("isLoggedIn", "true");
-                    localStorage.setItem("userName", userData[1]);
-                    localStorage.setItem("userEmail", userData[2]); // नया: ईमेल सेव करें
-                    localStorage.setItem("userCourse", userData[3]); 
-                    localStorage.setItem("userPhone", userData[4]);  
-                    localStorage.setItem("userStatus", userData[5]); // <--- नया: स्टेटस सेव करें (Active/Pending)
-                    localStorage.setItem("userAddress", userData[6]); // यहाँ एड्रेस सेव होगा
-                    localStorage.setItem("userPhoto", userData[7]);   // यहाँ फोटो सेव होगी
-                   
-                    window.location.href = "portal.html"; 
-                } else {
+                   if(result.includes("Success")) {
+    const userData = result.split("|"); 
+    
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userName",    userData[1]); // Name
+    localStorage.setItem("userEmail",   userData[2]); // Email
+    localStorage.setItem("userCourse",  userData[3]); // Course
+    localStorage.setItem("userPhone",   userData[4]); // Phone
+    localStorage.setItem("userStatus",  userData[5]); // Status
+    localStorage.setItem("userAddress", userData[6]); // Address
+    localStorage.setItem("userPhoto",   userData[7]); // Photo
+
+    window.location.href = "portal.html"; 
+} else {
                     document.getElementById('msg').innerHTML = "गलत नंबर या पासवर्ड!";
                     document.getElementById('msg').style.color = "red";
                 }
