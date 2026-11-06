@@ -96,31 +96,6 @@
             });
         });
     </script>
-</body>
-</html>';
-        
-        const form = document.getElementById('regForm');
-        const msg = document.getElementById('msg');
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            msg.style.color = "blue";
-            msg.innerHTML = "भेजा जा रहा है... कृपया प्रतीक्षा करें। / Sending...";
-            
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => {
-                msg.style.color = "green";
-                msg.innerHTML = "✅ बधाई हो! आपका पंजीकरण सफल रहा। / Registration Successful!";
-                form.reset();
-                // सफल पंजीकरण के बाद 3 सेकंड में लॉगिन पेज पर भेजें
-                setTimeout(() => { window.location.href = "login.html"; }, 3000);
-            })
-            .catch(error => {
-                msg.style.color = "red";
-                msg.innerHTML = "त्रुटि! कृपया इंटरनेट चेक करें। / Error!";
-                console.error('Error!', error.message);
-            });
-        });
-    </script>
 </body>
 </html>
