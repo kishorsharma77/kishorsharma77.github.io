@@ -79,7 +79,11 @@
             <p>कोर्स चुनें और फीस भुगतान करें</p>
             <a href="student-profile.html" class="btn">देखें</a>
         </div>
-
+<div id="suktam-card" class="card lockable">
+    <h3>🐚 Shri Suktam</h3>
+    <p>श्री सूक्तम् - विशेष कक्षाएँ</p>
+    <a href="suktam-lessons.html" class="btn">शुरू करें</a>
+</div>
         <!-- Module 2: Online Test -->
         <div id="test-card" class="card lockable">
             <h3>📝 Online Test</h3>
@@ -154,6 +158,10 @@
 
     // 3. कोर्स के हिसाब से अनलॉकिंग
     if (status === "Active") {
+        // suktam-card को अनलॉक करने का लॉजिक
+if (course.includes("Suktam")) {
+    unlockCard("suktam-card", "प्रवेश करें");
+}
         if (course.includes("NET")) {
             unlockCard("test-card", "प्रारंभ करें");
             unlockCard("tracker-card", "चेक करें");
