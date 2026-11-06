@@ -157,11 +157,11 @@
     lockAll();
 
     // 3. कोर्स के हिसाब से अनलॉकिंग
-    if (status === "Active") {
-        // suktam-card को अनलॉक करने का लॉजिक
-if (course.includes("Suktam")) {
-    unlockCard("suktam-card", "प्रवेश करें");
-}
+               if (course.includes("Suktam")) {
+                unlockCard("suktam-card", "प्रवेश करें");
+                // पक्का करें कि कार्ड का href 'suktam-lessons.html' पर जा रहा हो
+                document.getElementById("suktam-card").querySelector(".btn").href = "suktam-lessons.html";
+            }
         if (course.includes("NET")) {
             unlockCard("test-card", "प्रारंभ करें");
             unlockCard("tracker-card", "चेक करें");
