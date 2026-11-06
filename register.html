@@ -56,7 +56,21 @@
     </div>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz-B0FRDOtkIrzYwlN-oz4wYVqsDmwF-mwHAUgjKmPfVr0GB4Can_0gEEk8f3lCd5G6/exec' // <--- यहाँ स्टेप 2 वाला लिंक पेस्ट करें
+        const scriptURL = '// login.html के fetch वाले हिस्से के अंदर:
+if(result.includes("Success")) {
+    const userData = result.split("|"); 
+    
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userName",    userData[1]); // Name
+    localStorage.setItem("userPhone",   userData[2]); // Phone
+    localStorage.setItem("userEmail",   userData[3]); // Email
+    localStorage.setItem("userCourse",  userData[4]); // Course
+    localStorage.setItem("userStatus",  userData[5]); // Status
+    localStorage.setItem("userAddress", userData[6]); // Address
+    localStorage.setItem("userPhoto",   userData[7]); // Photo
+
+    window.location.href = "portal.html"; 
+}' // <--- यहाँ स्टेप 2 वाला लिंक पेस्ट करें
         const form = document.getElementById('regForm')
         const msg = document.getElementById('msg')
 
