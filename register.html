@@ -71,7 +71,106 @@
 
     <script>
         // --- अपना गूगल वेब ऐप यूआरएल यहाँ डालें ---
+        const scriptURL = '<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>छात्र पंजीकरण - Sanskrit Roots</title>
+    <style>
+        /* Top Navigation Bar Style */
+        .navbar {
+            background-color: #8b4513;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+        .navbar a:hover {
+            background-color: #a0522d;
+        }
+        body { font-family: sans-serif; background-color: #f4f1ea; padding: 0 0 20px 0; margin: 0; text-align: center; }
+        .form-container { background: white; padding: 30px; max-width: 400px; margin: 20px auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        input, select, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-family: inherit; }
+        button { background: #8b4513; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        #msg { margin-top: 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html">🏠 मुख्य पृष्ठ (Home)</a>
+        <a href="portal.html">🎓 छात्र पोर्टल (Portal)</a>
+    </nav>
+
+    <div class="form-container">
+        <h2>नया छात्र पंजीकरण</h2>
+        <p style="font-size: 0.9rem; color: #666;">New Student Registration</p>
+        
+        <form id="regForm">
+            <input type="text" name="Name" placeholder="आपका नाम / Full Name" required>
+            <input type="number" name="Phone" placeholder="WhatsApp नंबर / Phone" required>
+            <input type="email" name="Email" placeholder="ईमेल आईडी / Email" required>
+            <textarea name="Address" placeholder="आपका पूरा पता / Full Address" rows="3" required></textarea>
+            <input type="password" name="Password" placeholder="अपना पासवर्ड चुनें / Create Password" required>
+            
+            <select name="Course" required>
+                <option value="">-- कोर्स चुनें / Select Course --</option>
+                <option value="UGC NET Sanskrit">UGC NET Sanskrit</option>
+                <option value="Basic Sanskrit">Basic Sanskrit</option>
+                <option value="Stotra Learning">Stotra Learning</option>
+            </select>
+            
+            <button type="submit" id="submitBtn">पंजीकरण करें / Register Now</button>
+        </form>
+        
+        <p style="margin-top: 20px;">पहले से अकाउंट है? <a href="login.html" style="color: #8b4513; font-weight: bold;">यहाँ लॉगिन करें</a></p>
+        <p id="msg"></p>
+    </div>
+
+    <script>
+        // --- अपना गूगल वेब ऐप यूआरएल यहाँ डालें ---
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyDZATrLmZUQ95pmp0i5OAhxKlKE90PHm6qLNQKuWQ4kbvoCzASf5-rV20YzFmXApwb/exec';
+        
+        const form = document.getElementById('regForm');
+        const msg = document.getElementById('msg');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            msg.style.color = "blue";
+            msg.innerHTML = "भेजा जा रहा है... कृपया प्रतीक्षा करें। / Sending...";
+            
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.style.color = "green";
+                msg.innerHTML = "✅ बधाई हो! आपका पंजीकरण सफल रहा। / Registration Successful!";
+                form.reset();
+                // सफल पंजीकरण के बाद 3 सेकंड में लॉगिन पेज पर भेजें
+                setTimeout(() => { window.location.href = "login.html"; }, 3000);
+            })
+            .catch(error => {
+                msg.style.color = "red";
+                msg.innerHTML = "त्रुटि! कृपया इंटरनेट चेक करें। / Error!";
+                console.error('Error!', error.message);
+            });
+        });
+    </script>
+</body>
+</html>';
         
         const form = document.getElementById('regForm');
         const msg = document.getElementById('msg');
