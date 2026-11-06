@@ -127,18 +127,18 @@
 const scriptURL = 'https://script.google.com/macros/s/AKfycbz-B0FRDOtkIrzYwlN-oz4wYVqsDmwF-mwHAUgjKmPfVr0GB4Can_0gEEk8f3lCd5G6/exec
 ';
         // डेटा लोड करना
-        const userName = localStorage.getItem("userName") || "N/A";
-        const userPhone = localStorage.getItem("userPhone") || "N/A";
-        const userCourse = localStorage.getItem("userCourse") || "None";
-        const status = localStorage.getItem("userStatus");
+        // student-profile.html की स्क्रिप्ट में:
+document.getElementById("uName").innerText    = localStorage.getItem("userName") || "N/A";
+document.getElementById("uPhone").innerText   = localStorage.getItem("userPhone") || "N/A";
+document.getElementById("uCourse").innerText  = localStorage.getItem("userCourse") || "N/A";
+document.getElementById("uAddress").innerText = localStorage.getItem("userAddress") || "N/A";
 
-        document.getElementById("uName").innerText = userName;
-        document.getElementById("uPhone").innerText = userPhone;
-        document.getElementById("uCourse").innerText = userCourse;
-        
-        const statusEl = document.getElementById("uStatus");
-        statusEl.innerText = status || "Registered";
-        statusEl.classList.add(status === "Active" ? "active-status" : "pending-status");
+const status = localStorage.getItem("userStatus");
+const statusEl = document.getElementById("uStatus");
+statusEl.innerText = status || "Pending";
+
+// स्टेटस का रंग बदलना
+statusEl.className = "status-badge " + (status === "Active" ? "active-status" : "pending-status");
 
         function updatePayment() {
             const select = document.getElementById("courseSelect");
