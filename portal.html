@@ -137,6 +137,13 @@
     document.getElementById("userName").innerText = name || "छात्र";
     document.getElementById("userCourse").innerText = course || "Not Selected";
 
+     // 2. स्मार्ट लॉकिंग फंक्शन
+    function lockAll() {
+        document.querySelectorAll(".lockable").forEach(card => {
+            card.classList.add("locked-card");
+            card.querySelector(".btn").innerText = "🔒 Locked";
+        });
+    }
     // 2. स्मार्ट लॉकिंग फंक्शन (इसे थोड़ा अपडेट किया है ताकि लिंक भी जुड़ जाए)
 function unlockCard(id, originalText, linkUrl) {
     const card = document.getElementById(id);
