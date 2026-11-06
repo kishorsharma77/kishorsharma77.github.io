@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>श्रीसूक्तम् कक्षा - Sanskrit Roots</title>
+    <style>
+        body { font-family: 'Georgia', serif; background-color: #fdf8f0; line-height: 1.8; padding: 20px; }
+        .lesson-container { max-width: 800px; margin: auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.05); }
+        .title { color: #8b4513; text-align: center; border-bottom: 3px double #8b4513; padding-bottom: 10px; }
+        .video-box { width: 100%; height: 400px; background: #000; margin: 20px 0; border-radius: 10px; }
+        .shloka { font-size: 1.6rem; color: #b84a14; text-align: center; margin: 30px 0; font-weight: bold; white-space: pre-line; }
+        .meaning { background: #fdf8f0; padding: 20px; border-left: 5px solid #8b4513; margin-bottom: 30px; font-size: 1.1rem; }
+        .download-btn { display: inline-block; background: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="lesson-container">
+        <h1 class="title">॥ श्रीसूक्तम् (ऋग्वेद) ॥</h1>
+        <!-- Live Class Alert Section -->
+<div style="background: #e7f4e4; border: 2px solid #28a745; padding: 20px; border-radius: 10px; margin-bottom: 30px; text-align: center;">
+    <h3 style="margin-top: 0; color: #28a745;">🔴 लाइव कक्षा (Live Class)</h3>
+    <p style="margin: 5px 0; font-weight: bold;">अगली कक्षा: <span id="classTime">रविवार, प्रातः 10:00 बजे</span></p>
+    
+    <!-- गूगल मीट या ज़ूम का लिंक यहाँ बदलें -->
+    <a href="https://meet.google.com/abc-defg-hij" target="_blank" 
+       style="display: inline-block; background: #28a745; color: white; padding: 12px 25px; text-decoration: none; border-radius: 30px; font-weight: bold; margin-top: 10px; box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);">
+        ✅ कक्षा में शामिल हों / Join Class Now
+    </a>
+    
+    <p style="font-size: 0.85rem; color: #666; margin-top: 10px;">*कृपया क्लास के समय से 5 मिनट पहले जुड़ें।</p>
+</div>
+        <!-- 1. यूट्यूब वीडियो (अपना वीडियो लिंक यहाँ डालें) -->
+        <div class="video-box">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <p style="text-align: center;">
+            <a href="notes/shri-suktam.pdf" class="download-btn">📄 डाउनलोड नोट्स (PDF)</a>
+        </p>
+
+        <hr>
+
+        <!-- 2. श्लोक और अर्थ -->
+        <div class="shloka">
+            हिरण्यवर्णां हरिणीं सुवर्णरजतस्रजाम् ।
+            चन्द्रां हिरण्मयीं लक्ष्मीं जातवेदो म आवह ॥ १ ॥
+        </div>
+        
+        <div class="meaning">
+            <strong>अन्वय:</strong> हे जातवेदः! हिरण्यवर्णां हरिणीं सुवर्णरजतस्रजाम्...<br>
+            <strong>अर्थ:</strong> हे अग्निदेव! सुवर्ण के समान रंग वाली, रजत और स्वर्ण की माला धारण करने वाली... लक्ष्मी को मेरे लिए बुलाइये।
+        </div>
+
+        <!-- इसी तरह अन्य श्लोक जोड़ें -->
+
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="portal.html" style="color: #8b4513; font-weight: bold;">← डैशबोर्ड पर वापस जाएँ</a>
+        </div>
+    </div>
+
+</body>
+</html>
