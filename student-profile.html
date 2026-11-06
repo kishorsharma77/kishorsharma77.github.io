@@ -104,6 +104,20 @@
                 
                 <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">भुगतान के बाद रसीद का स्क्रीनशॉट जरूर भेजें।</p>
             </div>
+                                <!-- UTR Entry Section -->
+                    <div style="background: #f1f3f5; padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid #dee2e6;">
+                        <label style="font-weight: bold; display: block; margin-bottom: 8px; color: #495057;">
+                            भुगतान के बाद UTR / Transaction ID भरें:
+                        </label>
+                        <input type="text" id="utrInput" placeholder="12 अंकों का UTR नंबर यहाँ लिखें" 
+                               style="width: 100%; padding: 12px; border: 1px solid #ced4da; border-radius: 5px; box-sizing: border-box;">
+                        
+                        <button onclick="submitTransaction()" 
+                                style="background: #8b4513; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; margin-top: 12px; cursor: pointer; font-weight: bold; font-size: 1rem;">
+                            सबमिट करें (Submit Details)
+                        </button>
+                        <p id="payMsg" style="margin-top: 10px; font-weight: bold; font-size: 0.9rem;"></p>
+                    </div>
         </div>
         <br><a href="portal.html" style="color: #8b4513; text-decoration: none; font-weight: bold;">← डैशबोर्ड</a>
     </div>
@@ -161,6 +175,46 @@
                 alert("UPI ID कॉपी हो गई है!");
             });
         }
+        function submitTransaction() {
+    const utr = document.getElementById("utrInput").value;
+    const amount = document.getElementById("courseSelect").value;
+    const courseName = document.getElementById("courseSelect").options[document.getElementById("courseSelect").selectedIndex].text;
+    const msg = document.getElementById("payMsg");
+
+    if (utr.length < 6) {
+        alert("कृपया सही UTR / Transaction ID डालें (कम से कम 6-12 अंक)।");
+        return;
+    }
+
+    msg.innerText = "प्रोसेस किया जा रहा है... कृपया प्रतीक्षा करें।";
+    msg.style.color = "blue";
+    
+    const formData = new FormData();
+    formData.append("action", "submitPayment");
+    formData.append("Name", localStorage.getItem("userName"));
+    formData.append("Phone", localStorage.getItem("userPhone"));
+    formData.append("Email", localStorage.getItem("userEmail") || "N/A"); // ईमेल भी भेजें
+    formData.append("Course", courseName);
+    formData.append("Amount", amount);
+    formData.append("UTR", utr);
+
+    fetch(scriptURL, { method: 'POST', body: formData })
+    .then(res => res.text())
+    .then(result => {
+        if (result.includes("Success")) {
+            msg.style.color = "green";
+            msg.innerText = "✅ सफलता! आपकी जानकारी सुरक्षित भेज दी गई है। सत्यापन के बाद अकाउंट एक्टिव हो जाएगा।";
+            document.getElementById("utrInput").value = ""; // इनपुट साफ़ करें
+        } else {
+            msg.style.color = "red";
+            msg.innerText = "त्रुटि! डेटा सेव नहीं हो पाया। कृपया दोबारा प्रयास करें।";
+        }
+    })
+    .catch(err => {
+        msg.style.color = "red";
+        msg.innerText = "सर्वर एरर! इंटरनेट चेक करें।";
+    });
+}
     </script>
 </body>
 </html>
