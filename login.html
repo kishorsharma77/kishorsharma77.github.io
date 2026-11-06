@@ -74,14 +74,15 @@
                     const userData = result.split("|"); 
                     
                     // --- यहाँ बदलाव हुआ है ---
-                   if(result.includes("Success")) {
+                   // login.html के fetch वाले हिस्से के अंदर:
+if(result.includes("Success")) {
     const userData = result.split("|"); 
     
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("userName",    userData[1]); // Name
-    localStorage.setItem("userEmail",   userData[2]); // Email
-    localStorage.setItem("userCourse",  userData[3]); // Course
-    localStorage.setItem("userPhone",   userData[4]); // Phone
+    localStorage.setItem("userPhone",   userData[2]); // Phone
+    localStorage.setItem("userEmail",   userData[3]); // Email
+    localStorage.setItem("userCourse",  userData[4]); // Course
     localStorage.setItem("userStatus",  userData[5]); // Status
     localStorage.setItem("userAddress", userData[6]); // Address
     localStorage.setItem("userPhoto",   userData[7]); // Photo
