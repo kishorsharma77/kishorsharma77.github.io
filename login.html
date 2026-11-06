@@ -75,12 +75,13 @@
                     
                     // --- यहाँ बदलाव हुआ है ---
                     localStorage.setItem("isLoggedIn", "true");
-                    localStorage.setItem("userName", userData[1]);   
-                    localStorage.setItem("userCourse", userData[2]); 
-                    localStorage.setItem("userPhone", userData[3]);  
-                    localStorage.setItem("userStatus", userData[4]); // <--- नया: स्टेटस सेव करें (Active/Pending)
-                    localStorage.setItem("userAddress", userData[5]); // यहाँ एड्रेस सेव होगा
-                    localStorage.setItem("userPhoto", userData[6]);   // यहाँ फोटो सेव होगी
+                    localStorage.setItem("userName", userData[1]);
+                    localStorage.setItem("userEmail", userData[2]); // नया: ईमेल सेव करें
+                    localStorage.setItem("userCourse", userData[3]); 
+                    localStorage.setItem("userPhone", userData[4]);  
+                    localStorage.setItem("userStatus", userData[5]); // <--- नया: स्टेटस सेव करें (Active/Pending)
+                    localStorage.setItem("userAddress", userData[6]); // यहाँ एड्रेस सेव होगा
+                    localStorage.setItem("userPhoto", userData[7]);   // यहाँ फोटो सेव होगी
                    
                     window.location.href = "portal.html"; 
                 } else {
