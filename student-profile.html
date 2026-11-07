@@ -185,7 +185,7 @@
         .then(result => {
             if (result.includes("Success")) {
                 msg.style.color = "green";
-                msg.innerText = "✅ सफलता! जानकारी भेज दी गई है। रसीद आपके ईमेल पर भेज दी गई है।";
+                msg.innerText = "✅ सफलता! जानकारी भेज दी गई है। सत्यापन के पश्चात् रसीद आपके ईमेल पर भेज दी गई है।";
                 document.getElementById("utrInput").value = "";
             } else {
                 msg.style.color = "red";
