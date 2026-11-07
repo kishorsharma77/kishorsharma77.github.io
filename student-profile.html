@@ -170,7 +170,8 @@
 
         msg.innerText = "प्रोसेस किया जा रहा है...";
         msg.style.color = "blue";
-        
+
+        let payMode = (utr.length === 12 && !isNaN(utr)) ? "UPI (India)" : "PayPal (International)";
         const formData = new FormData();
         formData.append("action", "submitPayment");
         formData.append("Name", userName);
@@ -179,6 +180,7 @@
         formData.append("Course", courseName);
         formData.append("Amount", amount);
         formData.append("UTR", utr);
+        formData.append("Mode", payMode);
 
         fetch(scriptURL, { method: 'POST', body: formData })
         .then(res => res.text())
