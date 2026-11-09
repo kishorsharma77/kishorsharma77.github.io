@@ -102,17 +102,41 @@
         </div>
 
         <!-- 3. Dynamic Payment Window -->
-        <div id="payment-area">
-            <h2 id="payTitle" style="color:var(--main-brown)">Payment</h2>
-            <div id="qrBox">
-                <img id="qrImg" src="" style="width:200px; border:1px solid #ddd;">
-                <p><b>UPI ID:</b> sharmakishor77-2@okicici</p>
+        <!-- 3. Dynamic Payment Window (सुधरा हुआ) -->
+<div id="payment-area">
+    <h2 id="payTitle" style="color:var(--main-brown); margin-top:0;">Payment Details</h2>
+    
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; align-items: flex-start;">
+        
+        <!-- UPI Section (India) -->
+        <div style="flex: 1; min-width: 200px; border: 1px solid #eee; padding: 15px; border-radius: 10px;">
+            <p style="font-weight: bold; color: var(--accent-blue);">🇮🇳 भारतीय छात्र (UPI)</p>
+            <div class="qr-frame">
+                <img id="qrImg" src="" alt="QR Code" style="width: 180px;">
             </div>
-            <input type="text" id="utrInput" placeholder="Enter UTR / Transaction ID" style="width:80%; padding:10px; margin:10px 0;">
-            <button onclick="submitPay()" style="background:var(--main-brown); color:white; padding:10px 20px; border:none; border-radius:5px; cursor:pointer;">Submit Details</button>
-            <p id="msg"></p>
+            <p style="font-size: 0.8rem; margin-top: 10px;"><b>UPI ID:</b> sharmakishor77-2@okicici</p>
         </div>
 
+        <!-- PayPal Section (International) -->
+        <div style="flex: 1; min-width: 200px; border: 1px solid #eee; padding: 15px; border-radius: 10px; height: 100%;">
+            <p style="font-weight: bold; color: #003087;">🌎 International Students</p>
+            <div style="margin-top: 40px;">
+                <a href="https://www.paypal.com/ncp/payment/UULBJHGHKXC5L" target="_blank" 
+                   style="background: #003087; color: white; padding: 15px 25px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                   Pay via PayPal
+                </a>
+            </div>
+            <p style="font-size: 0.7rem; color: #666; margin-top: 20px;">Use PayPal for USD payments.</p>
+        </div>
+    </div>
+
+    <div style="border-top: 1px solid #eee; margin-top: 30px; padding-top: 20px;">
+        <label style="font-weight: bold; display: block; margin-bottom: 10px;">UTR / Transaction ID भरें:</label>
+        <input type="text" id="utrInput" placeholder="Enter 12-digit UTR or PayPal ID" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; text-align: center; box-sizing: border-box;">
+        <button onclick="submitPay()" style="background:var(--main-brown); color:white; padding: 15px; border:none; border-radius:8px; cursor:pointer; width: 100%; font-weight: bold; font-size: 1.1rem; margin-top: 15px;">सबमिट करें / Submit Details</button>
+        <p id="msg" style="font-weight: bold; margin-top: 10px;"></p>
+    </div>
+</div>
         <!-- 4. Footer Links -->
         <footer class="footer">
             <a href="index.html">Index page</a> | 
