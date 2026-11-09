@@ -147,10 +147,12 @@
     </main>
 
     <!-- Right Sidebar: On Demand -->
-    <aside class="sidebar">
-        <h3>On Demand Courses</h3>
-        <p>.........<br>Enter your requirement<br>.........</p>
-        <textarea style="width:90%; font-size:0.8rem;" rows="4" placeholder="Type here..."></textarea>
+   <aside class="sidebar">
+    <h3>On Demand Courses</h3>
+    <p>अपनी पसंद का विषय यहाँ लिखें:</p>
+    <textarea id="demandInput" style="width:95%; font-size:0.85rem; border-radius:5px; padding:5px;" rows="6" placeholder="जैसे: तर्कसंग्रह, काव्यप्रकाश आदि..."></textarea>
+    <button onclick="submitOnDemand()" style="background:var(--accent-saffron); color:white; border:none; padding:10px; border-radius:5px; cursor:pointer; width:100%; margin-top:10px; font-weight:bold;">अनुरोध भेजें / Submit</button>
+    <p id="demandMsg" style="font-size:0.75rem; margin-top:10px;"></p>
     </aside>
 </div>
 
@@ -242,22 +244,34 @@
 
     // ऑन डिमांड कोर्स सबमिट करने के लिए
     function submitOnDemand() {
-        const demandText = document.getElementById("demandInput").value;
-        if(demandText.length < 5) { alert("कृपया विस्तार से लिखें।"); return; }
+    const message = document.getElementById("demandInput").value;
+    const msgArea = document.getElementById("demandMsg");
 
-        const fd = new FormData();
-        fd.append("action", "submitRequest");
-        fd.append("Name", uName);
-        fd.append("Phone", uPhone);
-        fd.append("Message", demandText);
-
-        fetch(scriptURL, { method: 'POST', body: fd })
-        .then(res => res.text())
-        .then(res => {
-            alert("अनुरोध प्राप्त हुआ। धन्यवाद!");
-            document.getElementById("demandInput").value = "";
-        });
+    if (message.trim().length < 5) {
+        alert("कृपया थोड़ा विस्तार से लिखें।");
+        return;
     }
+
+    msgArea.innerText = "भेजा जा रहा है...";
+    
+    const formData = new FormData();
+    formData.append("action", "submitRequest");
+    formData.append("Name", localStorage.getItem("userName"));
+    formData.append("Phone", localStorage.getItem("userPhone"));
+    formData.append("Message", message);
+
+    fetch(scriptURL, { method: 'POST', body: formData })
+    .then(res => res.text())
+    .then(result => {
+        if (result.includes("Success")) {
+            msgArea.style.color = "#90ee90"; // Light Green
+            msgArea.innerText = "✅ प्रेषितम्!";
+            document.getElementById("demandInput").value = ""; // क्लियर बॉक्स
+        } else {
+            msgArea.innerText = "त्रुटि! पुनः प्रयास करें।";
+        }
+    });
+}
 </script>
 
 </body>
