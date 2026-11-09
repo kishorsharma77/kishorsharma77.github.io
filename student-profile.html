@@ -12,7 +12,7 @@
         .wrapper { display: flex; min-height: 100vh; }
 
         /* साइडबार्स */
-        .sidebar { width: 12%; background-color: var(--accent-blue); color: white; padding: 20px; text-align: center; position: sticky; top: 0; height: 100vh; font-size: 0.9rem; }
+        .sidebar { width: 15%; background-color: var(--accent-blue); color: white; padding: 20px; text-align: center; position: sticky; top: 0; height: 100vh; font-size: 0.9rem; }
         .sidebar h3 { border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; font-size: 1.1rem; }
 
         /* मुख्य कंटेंट */
@@ -37,7 +37,11 @@
         .enroll-btn:hover { background: var(--main-brown); color: white; }
 
         /* पेमेंट सेक्शन */
-        #payment-area { background: white; max-width: 500px; margin: 30px auto; padding: 30px; border-radius: 15px; display: none; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        #payment-area { background: white; max-width: 550px; margin: 30px auto; padding: 30px; border-radius: 15px; display: none; box-shadow: 0 10px 40px rgba(0,0,0,0.2); border-top: 10px solid var(--main-brown); }
+
+        .status-badge { padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.8rem; }
+        .Active { background: #d4edda; color: #155724; }
+        .Pending, .Registered { background: #fff3cd; color: #856404; }
 
         /* फुटर */
         .footer { margin-top: 50px; padding: 20px; border-top: 1px solid #ccc; font-size: 0.9rem; }
@@ -50,7 +54,7 @@
 <body>
 
 <div class="wrapper">
-    <!-- Left Sidebar: Upcoming -->
+    <!-- Left Sidebar -->
     <aside class="sidebar">
         <h3>Border – Upcoming</h3>
         <p>• ईशोपनिषद् व्याख्या<br>• व्याकरण प्रवेश<br>• गीता जयंती विशेष</p>
@@ -64,13 +68,13 @@
             <div class="user-details">
                 <p><strong>User Name –</strong> <span id="uName">...</span></p>
                 <p><strong>Email –</strong> <span id="uEmail">...</span></p>
-                <p><strong>Contact –</strong> <span id="uPhone">...</span></p>
+                <p><strong>Phone –</strong> <span id="uPhone">...</span></p>
                 <p><strong>Address –</strong> <span id="uAddress">...</span></p>
-                <p><strong>Past Courses –</strong> <span id="uPast">None</span></p>
                 <p><strong>Current Course –</strong> <span id="uCourse">...</span></p>
+                <span id="uStatus" class="status-badge">Pending</span>
             </div>
             <div class="profile-photo-circle">
-                <img id="uImg" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile">
+                <img id="uPhoto" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile">
             </div>
         </div>
 
@@ -78,89 +82,66 @@
         <div class="course-grid">
             <div class="course-item">
                 <h3>श्रीसूक्तम्</h3>
-                <p>Correct pronunciation & meaning of Rigvedic Shri Suktam.</p>
+                <p>₹500 / $10</p>
                 <button class="enroll-btn" onclick="openPay('Shri Suktam', 500)">Enroll / शुल्क भुगतान</button>
             </div>
             <div class="course-item">
                 <h3>श्रीविष्णुसहस्रनामस्तोत्रम्</h3>
-                <p>Learn 1000 names of Lord Vishnu with shastric methods.</p>
+                <p>₹1000 / $15</p>
                 <button class="enroll-btn" onclick="openPay('Vishnu Sahasranamam', 1000)">Enroll / शुल्क भुगतान</button>
             </div>
             <div class="course-item">
                 <h3>ललितासहस्रनाम</h3>
-                <p>Detailed chanting and spiritual significance.</p>
+                <p>₹1000 / $15</p>
                 <button class="enroll-btn" onclick="openPay('Lalita Sahasranamam', 1000)">Enroll / शुल्क भुगतान</button>
             </div>
             <div class="course-item">
                 <h3>श्रीदुर्गासप्तशती</h3>
-                <p>Correct path of Chandi Paath with meaning.</p>
+                <p>₹2100 / $30</p>
                 <button class="enroll-btn" onclick="openPay('Durga Saptashati', 2100)">Enroll / शुल्क भुगतान</button>
             </div>
-            <!-- More Courses -->
-            <div class="course-item"><h3>श्रीमद्भगवद्गीता</h3><button class="enroll-btn" onclick="openPay('Gita', 2100)">Enroll</button></div>
-            <div class="course-item"><h3>संस्कृतसम्भाषणम्</h3><button class="enroll-btn" onclick="openPay('Sanskrit Speaking', 1500)">Enroll</button></div>
         </div>
 
         <!-- 3. Dynamic Payment Window -->
-        <!-- 3. Dynamic Payment Window (सुधरा हुआ) -->
-<div id="payment-area">
-    <h2 id="payTitle" style="color:var(--main-brown); margin-top:0;">Payment Details</h2>
-    
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; align-items: flex-start;">
-        
-        <!-- UPI Section (India) -->
-        <div style="flex: 1; min-width: 200px; border: 1px solid #eee; padding: 15px; border-radius: 10px;">
-            <p style="font-weight: bold; color: var(--accent-blue);">🇮🇳 भारतीय छात्र (UPI)</p>
-            <div class="qr-frame">
-                <img id="qrImg" src="" alt="QR Code" style="width: 180px;">
+        <div id="payment-area">
+            <h2 id="payTitle">Payment</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; align-items: flex-start;">
+                <div style="flex: 1; min-width: 180px; border: 1px solid #eee; padding: 10px; border-radius: 10px;">
+                    <p style="font-weight: bold; color: var(--accent-blue);">भारतीय छात्र (UPI)</p>
+                    <img id="qrImg" src="" alt="QR Code" style="width: 160px; border: 1px solid #ddd; padding: 5px;">
+                    <p style="font-size: 0.8rem; margin-top: 5px;"><b>UPI ID:</b> sharmakishor77-2@okicici</p>
+                </div>
+                <div style="flex: 1; min-width: 180px; border: 1px solid #eee; padding: 10px; border-radius: 10px;">
+                    <p style="font-weight: bold; color: #003087;">International Students</p>
+                    <a href="https://www.paypal.com/ncp/payment/UULBJHGHKXC5L" target="_blank" style="background:#003087; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; display:inline-block; margin-top:30px; font-weight:bold;">Pay via PayPal</a>
+                </div>
             </div>
-            <p style="font-size: 0.8rem; margin-top: 10px;"><b>UPI ID:</b> sharmakishor77-2@okicici</p>
+            <div style="border-top: 1px solid #eee; margin-top: 20px; padding-top: 15px;">
+                <label style="font-weight: bold; display: block; margin-bottom: 5px;">UTR / Transaction ID भरें:</label>
+                <input type="text" id="utrInput" placeholder="Enter 12-digit UTR or PayPal ID" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
+                <button onclick="submitTransaction()" style="background:#28a745; color:white; padding: 12px; border:none; border-radius:5px; cursor:pointer; font-weight:bold; width: 100%; margin-top: 10px;">सबमिट करें / Submit Details</button>
+                <p id="msg"></p>
+            </div>
         </div>
 
-        <!-- PayPal Section (International) -->
-        <div style="flex: 1; min-width: 200px; border: 1px solid #eee; padding: 15px; border-radius: 10px; height: 100%;">
-            <p style="font-weight: bold; color: #003087;">🌎 International Students</p>
-            <div style="margin-top: 40px;">
-                <a href="https://www.paypal.com/ncp/payment/UULBJHGHKXC5L" target="_blank" 
-                   style="background: #003087; color: white; padding: 15px 25px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                   Pay via PayPal
-                </a>
-            </div>
-            <p style="font-size: 0.7rem; color: #666; margin-top: 20px;">Use PayPal for USD payments.</p>
-        </div>
-    </div>
-
-    <div style="border-top: 1px solid #eee; margin-top: 30px; padding-top: 20px;">
-        <label style="font-weight: bold; display: block; margin-bottom: 10px;">UTR / Transaction ID भरें:</label>
-        <input type="text" id="utrInput" placeholder="Enter 12-digit UTR or PayPal ID" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; text-align: center; box-sizing: border-box;">
-        <button onclick="submitPay()" style="background:var(--main-brown); color:white; padding: 15px; border:none; border-radius:8px; cursor:pointer; width: 100%; font-weight: bold; font-size: 1.1rem; margin-top: 15px;">सबमिट करें / Submit Details</button>
-        <p id="msg" style="font-weight: bold; margin-top: 10px;"></p>
-    </div>
-</div>
-        <!-- 4. Footer Links -->
         <footer class="footer">
-            <a href="index.html">Index page</a> | 
-            <a href="portal.html">Home (Portal)</a> | 
-            <a href="https://wa.me/918762647287">Contact us - WhatsApp</a> | 
-            <a href="mailto:edusanskrit8@gmail.com">Mail</a>
+            <a href="index.html">Index page</a> | <a href="portal.html">Dashboard</a> | <a href="https://wa.me/918762647287">WhatsApp</a>
         </footer>
     </main>
 
-    <!-- Right Sidebar: On Demand -->
-   <aside class="sidebar">
-    <h3>On Demand Courses</h3>
-    <p>अपनी पसंद का विषय यहाँ लिखें:</p>
-    <textarea id="demandInput" style="width:95%; font-size:0.85rem; border-radius:5px; padding:5px;" rows="6" placeholder="जैसे: तर्कसंग्रह, काव्यप्रकाश आदि..."></textarea>
-    <button onclick="submitOnDemand()" style="background:var(--accent-saffron); color:white; border:none; padding:10px; border-radius:5px; cursor:pointer; width:100%; margin-top:10px; font-weight:bold;">अनुरोध भेजें / Submit</button>
-    <p id="demandMsg" style="font-size:0.75rem; margin-top:10px;"></p>
+    <!-- Right Sidebar -->
+    <aside class="sidebar">
+        <h3>On Demand Courses</h3>
+        <textarea id="demandInput" style="width:95%; border-radius:5px;" rows="6" placeholder="Your requirement..."></textarea>
+        <button onclick="submitOnDemand()" style="background:var(--accent-saffron); color:white; border:none; padding:10px; border-radius:5px; cursor:pointer; width:100%; margin-top:10px; font-weight:bold;">Submit</button>
+        <p id="demandMsg" style="font-size:0.75rem; margin-top:10px;"></p>
     </aside>
 </div>
 
 <script>
-    // 1. अपना असली URL यहाँ डालें (जरूर चेक करें)
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyDZATrLmZUQ95pmp0i5OAhxKlKE90PHm6qLNQKuWQ4kbvoCzASf5-rV20YzFmXApwb/exec';
 
-    // डेटा लोड करने के वेरिएबल्स
+    // डेटा वेरिएबल्स
     const uName = localStorage.getItem("userName");
     const uPhone = localStorage.getItem("userPhone");
     const uEmail = localStorage.getItem("userEmail") || "N/A";
@@ -171,31 +152,28 @@
 
     window.onload = function() {
         document.getElementById("uName").innerText = uName || "N/A";
+        document.getElementById("uEmail").innerText = uEmail || "N/A";
         document.getElementById("uPhone").innerText = uPhone || "N/A";
         document.getElementById("uAddress").innerText = uAddress || "N/A";
         document.getElementById("uCourse").innerText = uCourse || "None";
         if(uPhoto) document.getElementById("uPhoto").src = uPhoto;
         
-        const st = document.getElementById("uStatus");
-        st.innerText = uStatus;
-        st.className = "status-badge " + uStatus;
+        const statusEl = document.getElementById("uStatus");
+        statusEl.innerText = uStatus;
+        statusEl.className = "status-badge " + uStatus;
     };
 
-    // ग्लोबल वेरिएबल्स जो पेमेंट के समय भरेंगे
     let currentSelectedCourse = "";
     let currentSelectedAmount = 0;
 
-    function openPay(name, price, usd) {
+    function openPay(name, price) {
         currentSelectedCourse = name;
         currentSelectedAmount = price;
-        
         document.getElementById("payTitle").innerText = "Payment for " + name;
-        document.getElementById("payment-section").style.display = "block";
-        
+        document.getElementById("payment-area").style.display = "block"; // ID मैच हो गई
         const upi = `upi://pay?pa=sharmakishor77-2@okicici&pn=DrKishor&am=${price}&cu=INR`;
         document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
-        
-        document.getElementById("payment-section").scrollIntoView({ behavior: 'smooth' });
+        document.getElementById("payment-area").scrollIntoView({ behavior: 'smooth' });
     }
 
     function submitTransaction() {
@@ -207,10 +185,8 @@
             return;
         }
 
-        msgArea.innerText = "प्रोसेस किया जा रहा है... कृपया प्रतीक्षा करें।";
+        msgArea.innerText = "Processing...";
         msgArea.style.color = "blue";
-        
-        // पेमेंट मोड पहचानना (12 अंक = UPI, बाकी = PayPal)
         let payMode = (utr.length === 12 && !isNaN(utr)) ? "UPI" : "PayPal";
 
         const formData = new FormData();
@@ -226,53 +202,37 @@
         fetch(scriptURL, { method: 'POST', body: formData })
         .then(res => res.text())
         .then(result => {
-            console.log("Response:", result);
             if (result.includes("Success")) {
                 alert("सफलता! आपकी जानकारी भेज दी गई है। सत्यापन के बाद रसीद ईमेल कर दी जाएगी।");
                 document.getElementById("utrInput").value = "";
                 location.reload();
             } else {
                 msgArea.style.color = "red";
-                msgArea.innerText = "त्रुटि! डेटा सेव नहीं हो पाया: " + result;
+                msgArea.innerText = "त्रुटि! " + result;
             }
-        })
-        .catch(err => {
-            msgArea.style.color = "red";
-            msgArea.innerText = "सर्वर एरर! इंटरनेट चेक करें।";
         });
     }
 
-    // ऑन डिमांड कोर्स सबमिट करने के लिए
     function submitOnDemand() {
-    const message = document.getElementById("demandInput").value;
-    const msgArea = document.getElementById("demandMsg");
+        const message = document.getElementById("demandInput").value;
+        const dMsgArea = document.getElementById("demandMsg");
+        if (message.trim().length < 5) { alert("कृपया विस्तार से लिखें।"); return; }
 
-    if (message.trim().length < 5) {
-        alert("कृपया थोड़ा विस्तार से लिखें।");
-        return;
+        dMsgArea.innerText = "भेजा जा रहा है...";
+        const fd = new FormData();
+        fd.append("action", "submitRequest");
+        fd.append("Name", uName);
+        fd.append("Phone", uPhone);
+        fd.append("Message", message);
+
+        fetch(scriptURL, { method: 'POST', body: fd }).then(res => res.text()).then(result => {
+            if (result.includes("Success")) {
+                dMsgArea.style.color = "#90ee90";
+                dMsgArea.innerText = "✅ प्रेषितम्!";
+                document.getElementById("demandInput").value = "";
+            }
+        });
     }
-
-    msgArea.innerText = "भेजा जा रहा है...";
-    
-    const formData = new FormData();
-    formData.append("action", "submitRequest");
-    formData.append("Name", localStorage.getItem("userName"));
-    formData.append("Phone", localStorage.getItem("userPhone"));
-    formData.append("Message", message);
-
-    fetch(scriptURL, { method: 'POST', body: formData })
-    .then(res => res.text())
-    .then(result => {
-        if (result.includes("Success")) {
-            msgArea.style.color = "#90ee90"; // Light Green
-            msgArea.innerText = "✅ प्रेषितम्!";
-            document.getElementById("demandInput").value = ""; // क्लियर बॉक्स
-        } else {
-            msgArea.innerText = "त्रुटि! पुनः प्रयास करें।";
-        }
-    });
-}
 </script>
-
 </body>
 </html>
