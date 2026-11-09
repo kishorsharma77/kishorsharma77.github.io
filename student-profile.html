@@ -214,25 +214,29 @@
     }
 
     function submitOnDemand() {
-        const message = document.getElementById("demandInput").value;
-        const dMsgArea = document.getElementById("demandMsg");
-        if (message.trim().length < 5) { alert("कृपया विस्तार से लिखें।"); return; }
-
-        dMsgArea.innerText = "भेजा जा रहा है...";
-        const fd = new FormData();
-        fd.append("action", "submitRequest");
-        fd.append("Name", uName);
-        fd.append("Phone", uPhone);
-        fd.append("Message", message);
-
-        fetch(scriptURL, { method: 'POST', body: fd }).then(res => res.text()).then(result => {
-            if (result.includes("Success")) {
-                dMsgArea.style.color = "#90ee90";
-                dMsgArea.innerText = "✅ प्रेषितम्!";
-                document.getElementById("demandInput").value = "";
-            }
-        });
+    const message = document.getElementById("demandInput").value;
+    if (message.trim().length < 5) {
+        alert("कृपया थोड़ा विस्तार से लिखें।");
+        return;
     }
+
+    const formData = new FormData();
+    formData.append("action", "submitRequest"); // यह नाम और Apps Script का नाम एक होना चाहिए
+    formData.append("Name", localStorage.getItem("userName"));
+    formData.append("Phone", localStorage.getItem("userPhone"));
+    formData.append("Message", message);
+
+    fetch(scriptURL, { method: 'POST', body: formData })
+    .then(res => res.text())
+    .then(result => {
+        if (result.includes("Success")) {
+            alert("✅ प्रेषितम्! (आपका अनुरोध भेज दिया गया है)");
+            document.getElementById("demandInput").value = "";
+        } else {
+            alert("त्रुटि: " + result);
+        }
+    });
+}
 </script>
 </body>
 </html>
