@@ -155,55 +155,107 @@
 </div>
 
 <script>
+    // 1. अपना असली URL यहाँ डालें (जरूर चेक करें)
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyDZATrLmZUQ95pmp0i5OAhxKlKE90PHm6qLNQKuWQ4kbvoCzASf5-rV20YzFmXApwb/exec';
 
-    // डेटा लोड करें
+    // डेटा लोड करने के वेरिएबल्स
+    const uName = localStorage.getItem("userName");
+    const uPhone = localStorage.getItem("userPhone");
+    const uEmail = localStorage.getItem("userEmail") || "N/A";
+    const uAddress = localStorage.getItem("userAddress");
+    const uCourse = localStorage.getItem("userCourse");
+    const uPhoto = localStorage.getItem("userPhoto");
+    const uStatus = localStorage.getItem("userStatus") || "Pending";
+
     window.onload = function() {
-        document.getElementById("uName").innerText = localStorage.getItem("userName") || "N/A";
-        document.getElementById("uEmail").innerText = localStorage.getItem("userEmail") || "N/A";
-        document.getElementById("uPhone").innerText = localStorage.getItem("userPhone") || "N/A";
-        document.getElementById("uAddress").innerText = localStorage.getItem("userAddress") || "N/A";
-        document.getElementById("uCourse").innerText = localStorage.getItem("userCourse") || "None";
-        if(localStorage.getItem("userPhoto")) document.getElementById("uImg").src = localStorage.getItem("userPhoto");
+        document.getElementById("uName").innerText = uName || "N/A";
+        document.getElementById("uPhone").innerText = uPhone || "N/A";
+        document.getElementById("uAddress").innerText = uAddress || "N/A";
+        document.getElementById("uCourse").innerText = uCourse || "None";
+        if(uPhoto) document.getElementById("uPhoto").src = uPhoto;
         
-        let status = localStorage.getItem("userStatus") || "Pending";
-        document.getElementById("uStatus").innerText = status;
-        document.getElementById("uStatus").className = "status-badge " + status;
+        const st = document.getElementById("uStatus");
+        st.innerText = uStatus;
+        st.className = "status-badge " + uStatus;
     };
 
-    let selectedCourse = "";
-    let selectedAmount = 0;
+    // ग्लोबल वेरिएबल्स जो पेमेंट के समय भरेंगे
+    let currentSelectedCourse = "";
+    let currentSelectedAmount = 0;
 
-    function openPay(name, price) {
-        selectedCourse = name;
-        selectedAmount = price;
+    function openPay(name, price, usd) {
+        currentSelectedCourse = name;
+        currentSelectedAmount = price;
+        
         document.getElementById("payTitle").innerText = "Payment for " + name;
-        document.getElementById("payment-area").style.display = "block";
+        document.getElementById("payment-section").style.display = "block";
+        
         const upi = `upi://pay?pa=sharmakishor77-2@okicici&pn=DrKishor&am=${price}&cu=INR`;
         document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
-        document.getElementById("payment-area").scrollIntoView({ behavior: 'smooth' });
+        
+        document.getElementById("payment-section").scrollIntoView({ behavior: 'smooth' });
     }
 
-    function submitPay() {
+    function submitTransaction() {
         const utr = document.getElementById("utrInput").value;
-        if(utr.length < 6) { alert("Please enter valid UTR"); return; }
-        
-        const fd = new FormData();
-        fd.append("action", "submitPayment");
-        fd.append("Name", localStorage.getItem("userName"));
-        fd.append("Phone", localStorage.getItem("userPhone"));
-        fd.append("Email", localStorage.getItem("userEmail"));
-        fd.append("Course", selectedCourse);
-        fd.append("Amount", selectedAmount);
-        fd.append("UTR", utr);
-        fd.append("Mode", (utr.length === 12 ? "UPI" : "PayPal"));
+        const msgArea = document.getElementById("msg");
 
-        document.getElementById("msg").innerText = "Processing...";
+        if (utr.trim().length < 6) {
+            alert("कृपया सही UTR / Transaction ID भरें।");
+            return;
+        }
+
+        msgArea.innerText = "प्रोसेस किया जा रहा है... कृपया प्रतीक्षा करें।";
+        msgArea.style.color = "blue";
+        
+        // पेमेंट मोड पहचानना (12 अंक = UPI, बाकी = PayPal)
+        let payMode = (utr.length === 12 && !isNaN(utr)) ? "UPI" : "PayPal";
+
+        const formData = new FormData();
+        formData.append("action", "submitPayment");
+        formData.append("Name", uName);
+        formData.append("Phone", uPhone);
+        formData.append("Email", uEmail);
+        formData.append("Course", currentSelectedCourse);
+        formData.append("Amount", currentSelectedAmount);
+        formData.append("UTR", utr);
+        formData.append("Mode", payMode);
+
+        fetch(scriptURL, { method: 'POST', body: formData })
+        .then(res => res.text())
+        .then(result => {
+            console.log("Response:", result);
+            if (result.includes("Success")) {
+                alert("सफलता! आपकी जानकारी भेज दी गई है। सत्यापन के बाद रसीद ईमेल कर दी जाएगी।");
+                document.getElementById("utrInput").value = "";
+                location.reload();
+            } else {
+                msgArea.style.color = "red";
+                msgArea.innerText = "त्रुटि! डेटा सेव नहीं हो पाया: " + result;
+            }
+        })
+        .catch(err => {
+            msgArea.style.color = "red";
+            msgArea.innerText = "सर्वर एरर! इंटरनेट चेक करें।";
+        });
+    }
+
+    // ऑन डिमांड कोर्स सबमिट करने के लिए
+    function submitOnDemand() {
+        const demandText = document.getElementById("demandInput").value;
+        if(demandText.length < 5) { alert("कृपया विस्तार से लिखें।"); return; }
+
+        const fd = new FormData();
+        fd.append("action", "submitRequest");
+        fd.append("Name", uName);
+        fd.append("Phone", uPhone);
+        fd.append("Message", demandText);
+
         fetch(scriptURL, { method: 'POST', body: fd })
         .then(res => res.text())
         .then(res => {
-            alert("सफलता! सत्यापन के बाद रसीद मिल जाएगी।");
-            location.reload();
+            alert("अनुरोध प्राप्त हुआ। धन्यवाद!");
+            document.getElementById("demandInput").value = "";
         });
     }
 </script>
