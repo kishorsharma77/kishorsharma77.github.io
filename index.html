@@ -143,12 +143,12 @@
 ">
     Classes & Quick Links:
 </strong>
-            <a href="login.html" style="color: var(--text-dark); text-decoration: none; font-weight: bold; background: var(--bg-color); padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.95rem; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-saffron)'; this.style.color='var(--accent-saffron)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)';">📿 Sanskrit Roots Portal</a>
-          <!--  <a href="portal.html" style="color: var(--text-dark); text-decoration: none; font-weight: bold; background: var(--bg-color); padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.95rem; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-saffron)'; this.style.color='var(--accent-saffron)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)';">🕉️ Learn Sanskrit</a>
+           <!-- <a href="login.html" style="color: var(--text-dark); text-decoration: none; font-weight: bold; background: var(--bg-color); padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.95rem; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-saffron)'; this.style.color='var(--accent-saffron)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)';">📿 Sanskrit Roots Portal</a>
+            <a href="portal.html" style="color: var(--text-dark); text-decoration: none; font-weight: bold; background: var(--bg-color); padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.95rem; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-saffron)'; this.style.color='var(--accent-saffron)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)';">🕉️ Learn Sanskrit</a>
             <a href="portal.html" style="color: var(--text-dark); text-decoration: none; font-weight: bold; background: var(--bg-color); padding: 8px 16px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.95rem; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-saffron)'; this.style.color='var(--accent-saffron)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)';">📜 Textual Study</a> -->
         </div>
          <!-- तारे को चमकाने के लिए छोटा सा CSS कोड -->
-        <style>
+        <!--<style>
             @keyframes pulse-glow {
                 0% { opacity: 0.4; transform: scale(0.9); }
                 50% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 5px rgba(184, 74, 20, 0.6)); }
@@ -159,7 +159,50 @@
                 animation: pulse-glow 2s infinite ease-in-out;
                 font-size: 1.2rem;
             }
-        </style>
+        </style>-->
+<!-- चमकदार पोर्टल लिंक -->
+<div style="background-color: var(--white); padding: 20px; border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 30px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+    
+    <strong style="color: var(--accent-saffron); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+        Classes & Quick Links:
+    </strong>
+
+    <a href="login.html" class="portal-link">
+        <span class="shining-star">✨</span> 📿 Sanskrit Roots Portal
+    </a>
+</div>
+
+<!-- स्टाइल को <style> टैग में जोड़ें (अगर नहीं है तो) -->
+<style>
+    .portal-link {
+        padding: 12px 25px;
+        background: linear-gradient(45deg, #b84a14, #d97706);
+        color: white !important;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 50px;
+        font-size: 1rem;
+        box-shadow: 0 4px 15px rgba(184, 74, 20, 0.4);
+        transition: all 0.3s ease;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .portal-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(184, 74, 20, 0.6);
+    }
+    @keyframes pulse-glow {
+        0% { opacity: 0.5; transform: scale(0.9); }
+        50% { opacity: 1; transform: scale(1.2); }
+        100% { opacity: 0.5; transform: scale(0.9); }
+    }
+    .shining-star {
+        animation: pulse-glow 1.5s infinite ease-in-out;
+    }
+</style>
+        
         <section id="about">
             <h2>परिचयः/ About Me</h2>
             <p>नमस्ते! स्वागतम्,  I am an Assistant Professor at Central Sanskrit University, Shri Raghunath Kirti Campus, Devprayag. I hold a Ph.D. in <strong>Nyāya Darśana</strong> and specialize in traditional Sanskrit systems of logic, classical Indian epistemology, and text digitization methodologies. My academic work spans ancient textual analyses alongside modern computational approaches to Indian knowledge systems.</p>
