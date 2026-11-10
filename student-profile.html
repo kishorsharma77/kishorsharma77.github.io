@@ -36,6 +36,22 @@
         .enroll-btn { background: #eee; border: 1px solid #ccc; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
         .enroll-btn:hover { background: var(--main-brown); color: white; }
 
+        .enroll-btn { 
+    background: #28a745; /* हरा रंग */
+    color: white; 
+    border: none; 
+    padding: 10px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    width: 100%; 
+    font-weight: bold; 
+    margin-top: 10px; 
+    transition: 0.3s;
+}
+
+.enroll-btn:hover { 
+    background: #218838; /* थोड़ा गहरा हरा रंग (होवर पर) */
+}
         /* पेमेंट सेक्शन */
         #payment-area { background: white; max-width: 550px; margin: 30px auto; padding: 30px; border-radius: 15px; display: none; box-shadow: 0 10px 40px rgba(0,0,0,0.2); border-top: 10px solid var(--main-brown); }
 
@@ -82,22 +98,22 @@
         <div class="course-grid">
             <div class="course-item">
                 <h3>श्रीसूक्तम्</h3>
-                <p>₹500 / $10</p>
-                <button class="enroll-btn" onclick="openPay('Shri Suktam', 500)">Enroll / शुल्क भुगतान</button>
+                <p>₹499 / $12</p>
+                <button class="enroll-btn" onclick="openPay('Shri Suktam', 499)">Enroll / शुल्क भुगतान</button>
             </div>
             <div class="course-item">
                 <h3>श्रीविष्णुसहस्रनामस्तोत्रम्</h3>
-                <p>₹1000 / $15</p>
-                <button class="enroll-btn" onclick="openPay('Vishnu Sahasranamam', 1000)">Enroll / शुल्क भुगतान</button>
+                <p>₹999 / $20</p>
+                <button class="enroll-btn" onclick="openPay('Vishnu Sahasranamam', 999)">Enroll / शुल्क भुगतान</button>
             </div>
             <div class="course-item">
                 <h3>ललितासहस्रनाम</h3>
-                <p>₹1000 / $15</p>
-                <button class="enroll-btn" onclick="openPay('Lalita Sahasranamam', 1000)">Enroll / शुल्क भुगतान</button>
+                <p>₹999 / $20</p>
+                <button class="enroll-btn" onclick="openPay('Lalita Sahasranamam', 999)">Enroll / शुल्क भुगतान</button>
             </div>
             <div class="course-item">
                 <h3>श्रीदुर्गासप्तशती</h3>
-                <p>₹2100 / $30</p>
+                <p>₹2100 / $40</p>
                 <button class="enroll-btn" onclick="openPay('Durga Saptashati', 2100)">Enroll / शुल्क भुगतान</button>
             </div>
         </div>
