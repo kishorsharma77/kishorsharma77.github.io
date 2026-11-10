@@ -52,6 +52,28 @@
 .enroll-btn:hover { 
     background: #218838; /* थोड़ा गहरा हरा रंग (होवर पर) */
 }
+
+     .course-item { 
+            background: white; 
+            border: 1px solid #cbd5e0; 
+            border-radius: 12px; 
+            padding: 20px; 
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .course-item h3 { color: var(--main-brown); font-size: 1.25rem; margin: 0 0 10px 0; }
+        
+        /* डिस्क्रिप्शन के लिए */
+        .course-desc { font-size: 0.85rem; color: #4a5568; margin: 10px 0; min-height: 50px; line-height: 1.4; }
+        
+        /* प्राइस को बोल्ड और डार्क करने के लिए */
+        .course-price { color: #2d3748; font-weight: 800; font-size: 1.2rem; margin: 10px 0; }
+        
+        .enroll-btn { background: #28a745; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; margin-top: auto; }
+        .enroll-btn:hover { background: #218838; }
+        
         /* पेमेंट सेक्शन */
         #payment-area { background: white; max-width: 550px; margin: 30px auto; padding: 30px; border-radius: 15px; display: none; box-shadow: 0 10px 40px rgba(0,0,0,0.2); border-top: 10px solid var(--main-brown); }
 
@@ -96,13 +118,18 @@
 
         <!-- 2. Course Selection Grid -->
         <div class="course-grid">
+            संस्कृत के शब्दों का शुद्ध उच्चारण करना अतीव आवश्यक है। शब्दों का उच्चारण अथवा पाठ दोषपूर्ण होने पर अर्थ का अनर्थ हो जाता है। स को श, ष को स, विसर्ग लोप, ऽ का बोध न होना आदि अनेक दोषों से बचने के लिए, कृपया उच्चारण की शुद्धता पर सर्वप्रथम अवधान करें। 
+        
             <div class="course-item">
                 <h3>श्रीसूक्तम्</h3>
                 <p>₹499 / $12</p>
+                <p class="course-desc">ऋग्वेदिक श्रीसूक्त का पाठ और अर्थ। शुद्ध उच्चारण सीखें।</p>
+                <p class="course-desc">Recordings उपलब्ध रहेंगी।</p>
                 <button class="enroll-btn" onclick="openPay('Shri Suktam', 499)">Enroll / शुल्क भुगतान</button>
             </div>
             <div class="course-item">
                 <h3>श्रीविष्णुसहस्रनामस्तोत्रम्</h3>
+                <p class="course-desc">भगवान विष्णु के 1000 नामों का संस्कृत में शुद्ध उच्चारण व सम्पूर्ण पाठ।</p>
                 <p>₹999 / $20</p>
                 <button class="enroll-btn" onclick="openPay('Vishnu Sahasranamam', 999)">Enroll / शुल्क भुगतान</button>
             </div>
@@ -113,6 +140,7 @@
             </div>
             <div class="course-item">
                 <h3>श्रीदुर्गासप्तशती</h3>
+                <p class="course-desc">शक्ति उपासना का सर्वश्रेष्ठ ग्रंथ, शुद्ध चण्डी पाठ सीखें।</p>
                 <p>₹2100 / $40</p>
                 <button class="enroll-btn" onclick="openPay('Durga Saptashati', 2100)">Enroll / शुल्क भुगतान</button>
             </div>
