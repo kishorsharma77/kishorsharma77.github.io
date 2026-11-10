@@ -104,8 +104,13 @@
             <p>कक्षा का समय और उपस्थिति</p>
             <a href="#" class="btn">चेक करें</a>
         </div>
-
-        <!-- Module 5: UGC NET Mock Test -->
+        <!-- Module 5: Class Tracker -->
+        <div id="tracker-card" class="card lockable">
+            <h3>School Text Books</h3>
+            <p>School Text Books</p>
+            <a href="#" class="btn">चेक करें</a>
+        </div>
+        <!-- Module 6: UGC NET Mock Test -->
         <div id="net-card" class="card lockable">
             <h3>🏆 UGC NET Mock Test</h3>
             <p>NET/JRF संस्कृत अभ्यास पोर्टल</p>
@@ -167,6 +172,12 @@ if (status === "Active") {
         unlockCard("suktam-card", "प्रवेश करें / Enter", "suktam-lessons.html");
     }
 
+    // School Text Books
+    if (course.includes("School")) {
+        unlockCard("test-card", "प्रारंभ करें / Start", "test.html");
+        unlockCard("tracker-card", "चेक करें / Check", "#");
+        unlockCard("net-card", "Mock Test", "mock-test.html");
+    }
     // यूजीसी नेट - UGC NET
     if (course.includes("NET")) {
         unlockCard("test-card", "प्रारंभ करें / Start", "test.html");
