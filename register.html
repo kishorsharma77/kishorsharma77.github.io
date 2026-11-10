@@ -57,10 +57,11 @@
             
             <select name="Course" required>
                 <option value="">-- कोर्स चुनें / Select Course --</option>
+                <option value="School Text Books"> School Text Books</option>
+                <option value="Stotra Learning">Stotra Learning</option>
                 <option value="Shri Suktam Classes">Shri Suktam Classes</option>
                 <option value="UGC NET Sanskrit">UGC NET Sanskrit</option>
                 <option value="Basic Sanskrit">Basic Sanskrit</option>
-                <option value="Stotra Learning">Stotra Learning</option>
             </select>
             
             <button type="submit" id="submitBtn">पंजीकरण करें / Register Now</button>
@@ -85,7 +86,7 @@
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
             .then(response => {
                 msg.style.color = "green";
-                msg.innerHTML = "✅ बधाई हो! आपका पंजीकरण सफल रहा। / Registration Successful!";
+                msg.innerHTML = "✅ आपका पंजीकरण सफल रहा। / Registration Successful!";
                 form.reset();
                 // सफल पंजीकरण के बाद 3 सेकंड में लॉगिन पेज पर भेजें
                 setTimeout(() => { window.location.href = "login.html"; }, 3000);
