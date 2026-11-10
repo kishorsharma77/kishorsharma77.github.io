@@ -90,7 +90,12 @@
             <p>साप्ताहिक क्विज़ और संस्कृत टेस्ट</p>
             <a href="test.html" class="btn">प्रारंभ करें</a>
         </div>
-
+<!-- Module 3: Saptashati Path -->
+        <div id="Saptashati-card" class="card lockable">
+            <h3>📖 Shri Durga-Saptashati</h3>
+            <p>शुद्ध उच्चारण, अर्थ सहित पाठविधिः </p>
+            <a href="shloka.html" class="btn">शुरू करें</a>
+        </div>
         <!-- Module 3: Shloka Visualizer -->
         <div id="shloka-card" class="card lockable">
             <h3>📖 Shloka Visualizer</h3>
@@ -177,6 +182,10 @@ if (status === "Active") {
         unlockCard("test-card", "प्रारंभ करें / Start", "test.html");
         unlockCard("tracker-card", "चेक करें / Check", "#");
         unlockCard("net-card", "Mock Test", "mock-test.html");
+    }
+    // सप्तशती-पाठः - Saptashati Path
+    if (course.includes("Saptashati")) {
+        unlockCard("Saptashati-card", "शुरू करें / Start", "Saptashati.html");
     }
     // यूजीसी नेट - UGC NET
     if (course.includes("NET")) {
