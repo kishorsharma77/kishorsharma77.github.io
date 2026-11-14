@@ -46,6 +46,11 @@
         <form id="loginForm">
             <input type="number" name="Phone" placeholder="WhatsApp नंबर" required>
             <input type="password" name="Password" placeholder="पासवर्ड" required>
+            <!-- Password Field के ठीक नीचे यह जोड़ें -->
+<div style="text-align: left; margin-top: -5px; margin-bottom: 15px; font-size: 0.85rem;">
+    <input type="checkbox" id="showPass" onclick="togglePassword()" style="width: auto; margin-right: 5px;">
+    <label for="showPass" style="cursor: pointer;">पासवर्ड दिखाएं / Show Password</label>
+</div>
             <input type="hidden" name="action" value="login">
             <button type="submit" id="loginBtn">प्रवेश करें</button>
         </form>
@@ -92,6 +97,14 @@
                     document.getElementById('msg').innerHTML = "गलत नंबर या पासवर्ड! / Incorrect Login!";
                     document.getElementById('msg').style.color = "red";
                 }
+            function togglePassword() {
+    var x = document.getElementsByName("Password")[0];
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
             })
             .catch(error => {
                 document.getElementById('msg').innerHTML = "सर्वर एरर! इंटरनेट चेक करें।";
