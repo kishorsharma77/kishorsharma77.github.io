@@ -221,34 +221,39 @@
 
     let currentAmount = 0;
 
-    function setPayType(type) {
-    const select = document.getElementById("courseSelect");
-    const amountBox = document.getElementById("amountBox");
-    
-    if (type === 'full') {
-        amountBox.style.display = "none";
-        currentSelectedAmount = select.value; // फुल अमाउंट सेट करें
-    } else {
-        amountBox.style.display = "block";
-        document.getElementById("customAmount").value = ""; // बॉक्स साफ़ करें
+   function setPayType(type) {
+        const select = document.getElementById("courseSelect");
+        if(select.value === "") { alert("कृपया कोर्स चुनें!"); return; }
+        
+        const amountBox = document.getElementById("amountBox");
+        
+        if (type === 'full') {
+            amountBox.style.display = "none";
+            currentSelectedAmount = select.value;
+            document.getElementById("paymentMethods").style.display = "block";
+            generateQR(); // Full payment के लिए QR तुरंत बनाएं
+        } else {
+            amountBox.style.display = "block";
+            document.getElementById("paymentMethods").style.display = "block";
+            document.getElementById("qrDiv").style.display = "none"; // QR छिपाएं जब तक अमाउंट न भरे
+        }
     }
-    
 
+    // 2. QR जेनरेट करें (यह function बाहर होना चाहिए)
     function generateQR() {
-    // अगर पार्शियल अमाउंट बॉक्स में कुछ लिखा है तो वो लें, वरना फुल कोर्स की फीस
-    const customAmt = document.getElementById("customAmount").value;
-    const fixedAmt = document.getElementById("courseSelect").value;
-    
-    currentSelectedAmount = (document.getElementById("amountBox").style.display === "block" && customAmt > 0) 
-                             ? customAmt : fixedAmt;
-                             
-    const upi = `upi://pay?pa=sharmakishor77-2@okicici&pn=DrKishor&am=${currentSelectedAmount}&cu=INR`;
-    document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
-    document.getElementById("qrDiv").style.display = "block";
-}
-         // QR कोड को तब तक छिपाएं जब तक बटन न दबे
-    document.getElementById("qrDiv").style.display = "none";
-}
+        const customAmt = document.getElementById("customAmount").value;
+        const fixedAmt = document.getElementById("courseSelect").value;
+        
+        // अगर पार्शियल बॉक्स खुला है, तो वहां वाला अमाउंट लें
+        currentSelectedAmount = (document.getElementById("amountBox").style.display === "block") 
+                                 ? customAmt : fixedAmt;
+
+        if (currentSelectedAmount <= 0) { alert("सही राशि डालें!"); return; }
+
+        const upi = `upi://pay?pa=sharmakishor77-2@okicici&pn=DrKishor&am=${currentSelectedAmount}&cu=INR`;
+        document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
+        document.getElementById("qrDiv").style.display = "block";
+    }
     // submitTransaction में currentAmount का उपयोग करें
     function submitTransaction() {
         // ... (बाकी कोड पुराना ही रहेगा)
