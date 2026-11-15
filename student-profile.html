@@ -222,23 +222,32 @@
     let currentAmount = 0;
 
     function setPayType(type) {
-        if(type === 'full') {
-            document.getElementById("amountBox").style.display = "none";
-            currentAmount = document.getElementById("courseSelect").value;
-        } else {
-            document.getElementById("amountBox").style.display = "block";
-        }
+    const select = document.getElementById("courseSelect");
+    const amountBox = document.getElementById("amountBox");
+    
+    if (type === 'full') {
+        amountBox.style.display = "none";
+        currentSelectedAmount = select.value; // फुल अमाउंट सेट करें
+    } else {
+        amountBox.style.display = "block";
+        document.getElementById("customAmount").value = ""; // बॉक्स साफ़ करें
     }
+    // QR कोड को तब तक छिपाएं जब तक बटन न दबे
+    document.getElementById("qrDiv").style.display = "none";
+}
 
     function generateQR() {
-        const customAmt = document.getElementById("customAmount").value;
-        currentAmount = (customAmt > 0) ? customAmt : document.getElementById("courseSelect").value;
-        
-        const upi = `upi://pay?pa=sharmakishor77-2@okicici&pn=DrKishor&am=${currentAmount}&cu=INR`;
-        document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
-        document.getElementById("qrDiv").style.display = "block";
-    }
-
+    // अगर पार्शियल अमाउंट बॉक्स में कुछ लिखा है तो वो लें, वरना फुल कोर्स की फीस
+    const customAmt = document.getElementById("customAmount").value;
+    const fixedAmt = document.getElementById("courseSelect").value;
+    
+    currentSelectedAmount = (document.getElementById("amountBox").style.display === "block" && customAmt > 0) 
+                             ? customAmt : fixedAmt;
+                             
+    const upi = `upi://pay?pa=sharmakishor77-2@okicici&pn=DrKishor&am=${currentSelectedAmount}&cu=INR`;
+    document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
+    document.getElementById("qrDiv").style.display = "block";
+}
     // submitTransaction में currentAmount का उपयोग करें
     function submitTransaction() {
         // ... (बाकी कोड पुराना ही रहेगा)
