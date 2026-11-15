@@ -171,30 +171,31 @@
     <h2 id="payTitle" style="color:var(--main-brown); margin-top:0;">Payment Details</h2>
     
     <!-- कोर्स का चुनाव और पेमेंट टाइप -->
-    <div style="margin-bottom: 20px;">
-        <button class="enroll-btn" style="background:#28a745; width:45%;" onclick="showPayInputs('full')">Full Payment</button>
-        <button class="enroll-btn" style="background:#d97706; width:45%;" onclick="showPayInputs('partial')">Partial Payment</button>
+        <!-- Full vs Partial Buttons -->
+    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+        <button class="enroll-btn" style="background:#28a745; margin-top:0;" onclick="setPayType('full')">Full Payment</button>
+        <button class="enroll-btn" style="background:#d97706; margin-top:0;" onclick="setPayType('partial')">Partial Payment</button>
     </div>
 
-    <!-- अमाउंट बॉक्स (जो सिर्फ पार्शियल के समय दिखेगा) -->
+    <!-- Amount Input (सिर्फ Partial के लिए) -->
     <div id="amountBox" style="display:none; margin-bottom:15px;">
-        <input type="number" id="customAmount" placeholder="राशि लिखें (Enter Amount)" class="input-field" style="width: 100%; padding: 12px; border: 2px solid #8b4513; border-radius: 8px;">
+        <input type="number" id="customAmount" placeholder="राशि लिखें (Amount)" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px;">
     </div>
 
-    <div id="qrArea" style="display:none;">
-        <div class="qr-frame">
-            <img id="qrImg" src="" alt="QR Code" style="width: 160px; border: 1px solid #ddd; padding: 5px;">
-        </div>
-        <p style="font-size: 0.8rem; margin-top: 5px;"><b>UPI ID:</b> sharmakishor77-2@okicici</p>
-        <a href="https://www.paypal.com/ncp/payment/UULBJHGHKXC5L" target="_blank" style="background:#003087; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; display:inline-block; margin-top:10px; font-weight:bold;">Pay via PayPal</a>
+    <!-- UPI & PayPal Buttons -->
+    <button class="enroll-btn" style="background:#8b4513;" onclick="generateQR()">Generate QR Code</button>
+    
+    <div class="qr-container" id="qrDiv">
+        <img id="qrImg" src="" alt="UPI QR Code">
+        <p><b>UPI ID:</b> sharmakishor77-2@okicici</p>
     </div>
 
-    <div style="border-top: 1px solid #eee; margin-top: 20px; padding-top: 15px;">
-        <label style="font-weight: bold; display: block; margin-bottom: 5px;">UTR / Transaction ID भरें:</label>
-        <input type="text" id="utrInput" placeholder="12-digit UTR or PayPal ID" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
-        <button onclick="submitTransaction()" style="background:#8b4513; color:white; padding: 12px; border:none; border-radius:5px; cursor:pointer; font-weight:bold; width: 100%; margin-top: 10px;">सबमिट करें (Submit Details)</button>
-        <p id="msg"></p>
-    </div>
+    <a href="https://www.paypal.com/ncp/payment/UULBJHGHKXC5L" target="_blank" class="btn-pay paypal-btn" style="display:block;">🌎 Pay via PayPal (Intl)</a>
+
+    <!-- UTR Input -->
+    <input type="text" id="utrInput" placeholder="Enter UTR / Transaction ID" style="width: 100%; padding: 12px; margin-top:10px; border: 1px solid #ccc; border-radius: 5px;">
+    <button onclick="submitTransaction()" style="background:#8b4513; color:white; border:none; padding:12px; width:100%; border-radius:5px; margin-top:10px; font-weight:bold;">सबमिट करें (Submit Details)</button>
+    <p id="msg"></p>
 </div>
 
         <footer class="footer">
