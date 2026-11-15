@@ -246,6 +246,9 @@
     document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
     document.getElementById("qrDiv").style.display = "block";
 }
+         // QR कोड को तब तक छिपाएं जब तक बटन न दबे
+    document.getElementById("qrDiv").style.display = "none";
+}
     // submitTransaction में currentAmount का उपयोग करें
     function submitTransaction() {
         // ... (बाकी कोड पुराना ही रहेगा)
