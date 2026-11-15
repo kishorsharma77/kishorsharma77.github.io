@@ -215,6 +215,33 @@
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzkoT4xHrPHtvzWR7OK9gUMdT1aOo6WwohnqC2NGKQgjIUedxLuRxBj9wYVrmdzrgv3/exec';
 
+
+    let currentAmount = 0;
+
+    function setPayType(type) {
+        if(type === 'full') {
+            document.getElementById("amountBox").style.display = "none";
+            currentAmount = document.getElementById("courseSelect").value;
+        } else {
+            document.getElementById("amountBox").style.display = "block";
+        }
+    }
+
+    function generateQR() {
+        const customAmt = document.getElementById("customAmount").value;
+        currentAmount = (customAmt > 0) ? customAmt : document.getElementById("courseSelect").value;
+        
+        const upi = `upi://pay?pa=sharmakishor77-2@okicici&pn=DrKishor&am=${currentAmount}&cu=INR`;
+        document.getElementById("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upi)}`;
+        document.getElementById("qrDiv").style.display = "block";
+    }
+
+    // submitTransaction में currentAmount का उपयोग करें
+    function submitTransaction() {
+        // ... (बाकी कोड पुराना ही रहेगा)
+        formData.append("Amount", currentAmount); // यहाँ currentAmount भेजें
+        // ...
+    }
     // डेटा वेरिएबल्स
     const uName = localStorage.getItem("userName");
     const uPhone = localStorage.getItem("userPhone");
