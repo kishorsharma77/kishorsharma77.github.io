@@ -278,7 +278,7 @@ function generateQR() {
     function submitTransaction() {
     const utr = document.getElementById("utrInput").value;
     const msgArea = document.getElementById("msg");
-    }
+    
     // अगर पार्शियल अमाउंट भरा है, तो उसे अपडेट कर लें
     if(document.getElementById("amountBox").style.display === "block") {
         currentSelectedAmount = document.getElementById("customAmount").value;
@@ -288,7 +288,7 @@ function generateQR() {
         alert("कृपया सही UTR / Transaction ID भरें।");
         return;
     }
-}
+
 
         msgArea.innerText = "Processing...";
         msgArea.style.color = "blue";
