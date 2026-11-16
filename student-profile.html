@@ -173,9 +173,7 @@
     <!-- 1. Selection Buttons -->
     <div style="margin-bottom: 25px; display:flex; gap:10px; justify-content:center;">
         <button class="enroll-btn" style="background:#28a745; margin-top:0; width:150px;" onclick="setPayType('full')">Full Payment</button>
-        <button class="enroll-btn" style="background:#d97706; margin-top:0; width:150px;" onclick="setPayType('partial')">Partial Payment</button>
         <button id="partialBtn" class="enroll-btn" style="background:#d97706; margin-top:0; width:150px;" onclick="setPayType('partial')">Partial Payment</button>
-</div>
     </div>
 
     <!-- 2. Manual Amount Input (Only for Partial) -->
@@ -233,21 +231,21 @@
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzkoT4xHrPHtvzWR7OK9gUMdT1aOo6WwohnqC2NGKQgjIUedxLuRxBj9wYVrmdzrgv3/exec';
 
     // डेटा वेरिएबल्स
-    const uName = localStorage.getItem("userName");
-    const uPhone = localStorage.getItem("userPhone");
-    const uEmail = localStorage.getItem("userEmail") || "N/A";
-    const uAddress = localStorage.getItem("userAddress");
-    const uCourse = localStorage.getItem("userCourse");
-    const uPhoto = localStorage.getItem("userPhoto");
-    const uStatus = localStorage.getItem("userStatus") || "Pending";
+    let fixedPrice = 0;
+    let currentAmountToPay = 0;
+    let currentSelectedCourse = "";
 
     window.onload = function() {
-        document.getElementById("uName").innerText = uName || "N/A";
-        document.getElementById("uEmail").innerText = uEmail || "N/A";
-        document.getElementById("uPhone").innerText = uPhone || "N/A";
-        document.getElementById("uAddress").innerText = uAddress || "N/A";
-        document.getElementById("uCourse").innerText = uCourse || "None";
-        if(uPhoto) document.getElementById("uPhoto").src = uPhoto;
+        document.getElementById("uName").innerText = localStorage.getItem("userName") || "N/A";
+        document.getElementById("uEmail").innerText = localStorage.getItem("userEmail") || "N/A";
+        document.getElementById("uPhone").innerText = localStorage.getItem("userPhone") || "N/A";
+        document.getElementById("uAddress").innerText = localStorage.getItem("userAddress") || "N/A";
+        document.getElementById("uCourse").innerText = localStorage.getItem("userCourse") || "None";
+        
+        const photo = localStorage.getItem("userPhoto");
+        if(photo && photo !== "") {
+            document.getElementById("uPhoto").src = photo;
+        }
 
         // --- Partial Payment बटन का मास्टर स्विच ---
         const allowPartial = localStorage.getItem("userAllowPartial");
@@ -259,17 +257,16 @@
         // स्टेटस का रंग और टेक्स्ट
         const status = localStorage.getItem("userStatus") || "Pending";
         const statusEl = document.getElementById("uStatus");
-        statusEl.innerText = status;
-        statusEl.className = "status-badge " + status;
+        if (statusEl) {
+            statusEl.innerText = status;
+            statusEl.className = "status-badge " + status;
+        }
     };
 
     function logout() {
         localStorage.clear();
         window.location.href = "login.html";
     }
-
-    let currentSelectedCourse = "";
-    let currentSelectedAmount = 0;
 
     // 2. कोर्स सिलेक्ट करने पर
     function openPay(name, price) {
