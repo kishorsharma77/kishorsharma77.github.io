@@ -101,7 +101,8 @@
                     localStorage.setItem("userStatus",  userData[5]); // Status
                     localStorage.setItem("userAddress", userData[6]); // Address
                     localStorage.setItem("userPhoto",   userData[7]); // Photo
-
+                    localStorage.setItem("userAllowPartial", userData[8]); // 9वीं जानकारी (Allow Partial)
+                    
                     window.location.href = "portal.html"; 
                 } else {
                     document.getElementById('msg').innerHTML = "गलत नंबर या पासवर्ड! / Incorrect Login!";
