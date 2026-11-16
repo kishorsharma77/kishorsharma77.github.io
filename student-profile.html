@@ -249,18 +249,24 @@
         document.getElementById("uCourse").innerText = uCourse || "None";
         if(uPhoto) document.getElementById("uPhoto").src = uPhoto;
 
+        // --- Partial Payment बटन का मास्टर स्विच ---
         const allowPartial = localStorage.getItem("userAllowPartial");
-    const pBtn = document.getElementById("partialBtn");
+        const pBtn = document.getElementById("partialBtn");
+        if (pBtn) {
+            pBtn.style.display = (allowPartial === "Yes") ? "inline-block" : "none";
+        }
 
-    if (allowPartial === "Yes") {
-        pBtn.style.display = "inline-block"; // अगर अनुमति है तो बटन दिखाएँ
-    } else {
-        pBtn.style.display = "none"; // वरना बटन को पूरी तरह से गायब कर दें
-    }
+        // स्टेटस का रंग और टेक्स्ट
+        const status = localStorage.getItem("userStatus") || "Pending";
         const statusEl = document.getElementById("uStatus");
-        statusEl.innerText = uStatus;
-        statusEl.className = "status-badge " + uStatus;
+        statusEl.innerText = status;
+        statusEl.className = "status-badge " + status;
     };
+
+    function logout() {
+        localStorage.clear();
+        window.location.href = "login.html";
+    }
 
     let currentSelectedCourse = "";
     let currentSelectedAmount = 0;
