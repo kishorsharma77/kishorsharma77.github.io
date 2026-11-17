@@ -322,6 +322,8 @@
     function submitTransaction() {
         const utr = document.getElementById("utrInput").value;
         const msgArea = document.getElementById("msg");
+        // सबमिट होते ही बटन डिसेबल करें
+event.target.disabled = true;
 
         if (utr.trim().length < 6) {
             alert("कृपया सही UTR / Transaction ID भरें।");
