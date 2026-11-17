@@ -81,6 +81,7 @@
         const msg = document.getElementById('msg');
 
         form.addEventListener('submit', e => {
+            document.getElementById('submitBtn').disabled = true; // बटन को लॉक कर दो ताकि 10 बार क्लिक न हो
             e.preventDefault();
             msg.style.color = "blue";
             msg.innerHTML = "भेजा जा रहा है... कृपया प्रतीक्षा करें। / Sending...";
